@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>बाईसा का सिंगार | Artificial Jewellery</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="top">✨ ₹999 से ऊपर फ्री शिपिंग • Online Payment Only</div>
+  <div class="head">
+    <div class="brand"><span class="logo">♕</span><div><b>बाईसा का सिंगार</b><small>आपका विश्वास, हमारा सिंगार</small></div></div>
+    <input id="search" placeholder="ज्वेलरी खोजें…">
+    <button class="cartBtn" onclick="openCart()">🛒 <span id="cartCount">0</span></button>
+  </div>
+  <nav id="nav"></nav>
+</header>
+
+<section class="hero">
+  <div>
+    <p>हर नारी के श्रृंगार की पहली पसंद</p>
+    <h1>बाईसा का सिंगार</h1>
+    <h3>शुद्धता • सुंदरता • भरोसा</h3>
+    <button onclick="document.getElementById('products').scrollIntoView()">अभी देखें</button>
+  </div>
+  <div class="heroArt">👰‍♀️<span>💎</span></div>
+</section>
+
+<section class="cats" id="cats"></section>
+
+<main id="products">
+  <div class="title"><span>✦</span> लोकप्रिय ज्वेलरी <span>✦</span></div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<section class="offer">
+  <div><b>विशेष ऑफर</b><span>इस सप्ताह की खास डील</span></div>
+  <div>🚚 <b>फ्री शिपिंग</b><small>₹999+ ऑर्डर पर</small></div>
+  <div>↩️ <b>7 दिन रिटर्न</b><small>आसान रिटर्न पॉलिसी</small></div>
+  <div>🔒 <b>सुरक्षित भुगतान</b><small>Online Payment Only</small></div>
+</section>
+
+<section class="about">
+  <div class="shopImg">💎<br>👑<br>✨</div>
+  <div><h2>हमारे बारे में</h2><p>बाईसा का सिंगार में आपका स्वागत है। यहाँ आपको खूबसूरत आर्टिफिशियल ज्वेलरी के नए और पारंपरिक डिज़ाइन एक ही जगह मिलेंगे।</p></div>
+</section>
+
+<footer>
+  <div><h2>♕ बाईसा का सिंगार</h2><p>आपका विश्वास, हमारा सिंगार</p></div>
+  <div><b>त्वरित लिंक</b><p>होम • सभी उत्पाद • ऑफर • संपर्क करें</p></div>
+  <div><b>ऑर्डर सहायता</b><p>मेरा ऑर्डर • रिटर्न • FAQ</p></div>
+  <div><b>भुगतान</b><p>UPI • Card • Net Banking</p><strong>COD उपलब्ध नहीं है</strong></div>
+</footer>
+
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<aside class="drawer" id="drawer">
+  <button class="close" onclick="closeCart()">×</button>
+  <h2>आपका कार्ट</h2><div id="cartItems"></div>
+  <div class="total">कुल: ₹<span id="total">0</span></div>
+  <button class="pay" onclick="checkout()">💳 Online Payment पर जाएँ</button>
+  <small class="note">COD उपलब्ध नहीं है। ऑर्डर ऑनलाइन भुगतान सफल होने के बाद ही कन्फर्म होगा।</small>
+</aside>
+<script src="script.js"></script>
+</body>
+</html>
