@@ -1,66 +1,35 @@
 <!doctype html>
 <html lang="hi">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>बाईसा का सिंगार | Artificial Jewellery</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>बाईसा का सिंगार | Artificial Jewellery</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="top">✨ बाईसा का सिंगार • Artificial Jewellery • Online Payment Only • COD उपलब्ध नहीं</div>
 <header>
-  <div class="top">✨ ₹999 से ऊपर फ्री शिपिंग • Online Payment Only</div>
-  <div class="head">
-    <div class="brand"><span class="logo">♕</span><div><b>बाईसा का सिंगार</b><small>आपका विश्वास, हमारा सिंगार</small></div></div>
-    <input id="search" placeholder="ज्वेलरी खोजें…">
-    <button class="cartBtn" onclick="openCart()">🛒 <span id="cartCount">0</span></button>
-  </div>
-  <nav id="nav"></nav>
+  <div class="brand"><div class="mark">♕</div><div><div class="name">बाईसा का सिंगार</div><div class="tag">हर श्रृंगार में राजसी अंदाज़</div></div></div>
+  <div class="search"><span>⌕</span><input id="search" placeholder="ज्वेलरी, सेट या कैटेगरी खोजें..."></div>
+  <button class="cart" onclick="openCart()">🛒 <b id="count">0</b></button>
 </header>
+<nav id="nav"></nav>
 
 <section class="hero">
-  <div>
-    <p>हर नारी के श्रृंगार की पहली पसंद</p>
-    <h1>बाईसा का सिंगार</h1>
-    <h3>शुद्धता • सुंदरता • भरोसा</h3>
-    <button onclick="document.getElementById('products').scrollIntoView()">अभी देखें</button>
-  </div>
-  <div class="heroArt">👰‍♀️<span>💎</span></div>
+ <div class="heroText"><div class="eyebrow">NEW COLLECTION 2026</div><h1>बाईसा का<br><em>सिंगार</em></h1><p>राजस्थानी अंदाज़ से लेकर मॉडर्न ब्राइडल कलेक्शन तक — खूबसूरत आर्टिफिशियल ज्वेलरी एक ही जगह।</p><button onclick="goProducts()">कलेक्शन देखें →</button></div>
+ <div class="heroJewels"><div class="halo">♕</div><div class="necklace">✦<br>◆ ◆ ◆<br>◆ ◇ ◆<br>◆◆◆◆◆</div></div>
 </section>
 
-<section class="cats" id="cats"></section>
+<section class="section"><div class="sectionHead"><div><span>OUR COLLECTION</span><h2>ज्वेलरी की दुनिया</h2></div></div><div class="cats" id="cats"></div></section>
 
-<main id="products">
-  <div class="title"><span>✦</span> लोकप्रिय ज्वेलरी <span>✦</span></div>
-  <div class="grid" id="grid"></div>
-</main>
+<section class="section" id="products"><div class="sectionHead"><div><span>BEST SELLERS</span><h2>पसंदीदा डिज़ाइन</h2></div><button class="outline" onclick="render(products)">सभी देखें</button></div><div class="grid" id="grid"></div></section>
 
-<section class="offer">
-  <div><b>विशेष ऑफर</b><span>इस सप्ताह की खास डील</span></div>
-  <div>🚚 <b>फ्री शिपिंग</b><small>₹999+ ऑर्डर पर</small></div>
-  <div>↩️ <b>7 दिन रिटर्न</b><small>आसान रिटर्न पॉलिसी</small></div>
-  <div>🔒 <b>सुरक्षित भुगतान</b><small>Online Payment Only</small></div>
-</section>
+<section class="trust"><div>🔒<b>सुरक्षित भुगतान</b><small>UPI • Card • Net Banking</small></div><div>🚚<b>ऑर्डर ट्रैकिंग</b><small>ऑर्डर के बाद अपडेट</small></div><div>💎<b>सुंदर कलेक्शन</b><small>नए डिज़ाइन लगातार</small></div><div>↩️<b>आसान सहायता</b><small>रिटर्न/सपोर्ट उपलब्ध</small></div></section>
 
-<section class="about">
-  <div class="shopImg">💎<br>👑<br>✨</div>
-  <div><h2>हमारे बारे में</h2><p>बाईसा का सिंगार में आपका स्वागत है। यहाँ आपको खूबसूरत आर्टिफिशियल ज्वेलरी के नए और पारंपरिक डिज़ाइन एक ही जगह मिलेंगे।</p></div>
-</section>
+<section class="about"><div class="aboutArt">👑<br><span>बाईसा का सिंगार</span></div><div><span>ABOUT US</span><h2>आपका श्रृंगार, हमारी पहचान</h2><p>हमारा उद्देश्य सुंदर, ट्रेंडी और पारंपरिक आर्टिफिशियल ज्वेलरी को आसान ऑनलाइन खरीदारी के साथ आप तक पहुँचाना है।</p></div></section>
 
-<footer>
-  <div><h2>♕ बाईसा का सिंगार</h2><p>आपका विश्वास, हमारा सिंगार</p></div>
-  <div><b>त्वरित लिंक</b><p>होम • सभी उत्पाद • ऑफर • संपर्क करें</p></div>
-  <div><b>ऑर्डर सहायता</b><p>मेरा ऑर्डर • रिटर्न • FAQ</p></div>
-  <div><b>भुगतान</b><p>UPI • Card • Net Banking</p><strong>COD उपलब्ध नहीं है</strong></div>
-</footer>
+<footer><div><div class="name">♕ बाईसा का सिंगार</div><p>हर श्रृंगार में राजसी अंदाज़</p></div><div><b>कलेक्शन</b><p>हार • झुमके • चूड़ियाँ • रिंग • ब्राइडल</p></div><div><b>ग्राहक सहायता</b><p>ऑर्डर • रिटर्न • संपर्क • FAQ</p></div><div><b>भुगतान</b><p>UPI • Card • Net Banking</p><strong>COD नहीं है</strong></div></footer>
 
-<div class="overlay" id="overlay" onclick="closeCart()"></div>
-<aside class="drawer" id="drawer">
-  <button class="close" onclick="closeCart()">×</button>
-  <h2>आपका कार्ट</h2><div id="cartItems"></div>
-  <div class="total">कुल: ₹<span id="total">0</span></div>
-  <button class="pay" onclick="checkout()">💳 Online Payment पर जाएँ</button>
-  <small class="note">COD उपलब्ध नहीं है। ऑर्डर ऑनलाइन भुगतान सफल होने के बाद ही कन्फर्म होगा।</small>
-</aside>
+<div class="shade" id="shade" onclick="closeCart()"></div>
+<aside class="drawer" id="drawer"><button class="x" onclick="closeCart()">×</button><h2>आपका कार्ट</h2><div id="items"></div><div class="sum">कुल <b>₹<span id="total">0</span></b></div><button class="checkout" onclick="pay()">💳 सुरक्षित Online Payment</button><small>ऑर्डर केवल सफल ऑनलाइन भुगतान के बाद कन्फर्म होगा। COD उपलब्ध नहीं है।</small></aside>
 <script src="script.js"></script>
-</body>
-</html>
+</body></html>
