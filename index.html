@@ -1,35 +1,484 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>बाईसा का सिंगार | Artificial Jewellery</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>बाईसा का सिंगार | Artificial Jewellery</title>
+
+  <meta name="description" content="बाईसा का सिंगार - Premium Artificial Jewellery Online Store">
+
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<div class="top">✨ बाईसा का सिंगार • Artificial Jewellery • Online Payment Only • COD उपलब्ध नहीं</div>
-<header>
-  <div class="brand"><div class="mark">♕</div><div><div class="name">बाईसा का सिंगार</div><div class="tag">हर श्रृंगार में राजसी अंदाज़</div></div></div>
-  <div class="search"><span>⌕</span><input id="search" placeholder="ज्वेलरी, सेट या कैटेगरी खोजें..."></div>
-  <button class="cart" onclick="openCart()">🛒 <b id="count">0</b></button>
-</header>
-<nav id="nav"></nav>
 
-<section class="hero">
- <div class="heroText"><div class="eyebrow">NEW COLLECTION 2026</div><h1>बाईसा का<br><em>सिंगार</em></h1><p>राजस्थानी अंदाज़ से लेकर मॉडर्न ब्राइडल कलेक्शन तक — खूबसूरत आर्टिफिशियल ज्वेलरी एक ही जगह।</p><button onclick="goProducts()">कलेक्शन देखें →</button></div>
- <div class="heroJewels"><div class="halo">♕</div><div class="necklace">✦<br>◆ ◆ ◆<br>◆ ◇ ◆<br>◆◆◆◆◆</div></div>
-</section>
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    ✨ बाईसा का सिंगार • Premium Artificial Jewellery • COD उपलब्ध नहीं है
+  </div>
 
-<section class="section"><div class="sectionHead"><div><span>OUR COLLECTION</span><h2>ज्वेलरी की दुनिया</h2></div></div><div class="cats" id="cats"></div></section>
+  <!-- HEADER -->
+  <header class="header">
 
-<section class="section" id="products"><div class="sectionHead"><div><span>BEST SELLERS</span><h2>पसंदीदा डिज़ाइन</h2></div><button class="outline" onclick="render(products)">सभी देखें</button></div><div class="grid" id="grid"></div></section>
+    <div class="brand">
+      <div class="brand-icon">👑</div>
 
-<section class="trust"><div>🔒<b>सुरक्षित भुगतान</b><small>UPI • Card • Net Banking</small></div><div>🚚<b>ऑर्डर ट्रैकिंग</b><small>ऑर्डर के बाद अपडेट</small></div><div>💎<b>सुंदर कलेक्शन</b><small>नए डिज़ाइन लगातार</small></div><div>↩️<b>आसान सहायता</b><small>रिटर्न/सपोर्ट उपलब्ध</small></div></section>
+      <div>
+        <h1>बाईसा का सिंगार</h1>
+        <p>Artificial Jewellery</p>
+      </div>
+    </div>
 
-<section class="about"><div class="aboutArt">👑<br><span>बाईसा का सिंगार</span></div><div><span>ABOUT US</span><h2>आपका श्रृंगार, हमारी पहचान</h2><p>हमारा उद्देश्य सुंदर, ट्रेंडी और पारंपरिक आर्टिफिशियल ज्वेलरी को आसान ऑनलाइन खरीदारी के साथ आप तक पहुँचाना है।</p></div></section>
+    <div class="search-box">
+      <span>🔍</span>
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Jewellery खोजें..."
+      >
+    </div>
 
-<footer><div><div class="name">♕ बाईसा का सिंगार</div><p>हर श्रृंगार में राजसी अंदाज़</p></div><div><b>कलेक्शन</b><p>हार • झुमके • चूड़ियाँ • रिंग • ब्राइडल</p></div><div><b>ग्राहक सहायता</b><p>ऑर्डर • रिटर्न • संपर्क • FAQ</p></div><div><b>भुगतान</b><p>UPI • Card • Net Banking</p><strong>COD नहीं है</strong></div></footer>
+    <button class="cart-button" onclick="openCart()">
+      🛒 Cart
+      <span id="cartCount">0</span>
+    </button>
 
-<div class="shade" id="shade" onclick="closeCart()"></div>
-<aside class="drawer" id="drawer"><button class="x" onclick="closeCart()">×</button><h2>आपका कार्ट</h2><div id="items"></div><div class="sum">कुल <b>₹<span id="total">0</span></b></div><button class="checkout" onclick="pay()">💳 सुरक्षित Online Payment</button><small>ऑर्डर केवल सफल ऑनलाइन भुगतान के बाद कन्फर्म होगा। COD उपलब्ध नहीं है।</small></aside>
-<script src="script.js"></script>
-</body></html>
+  </header>
+
+
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+
+    <a href="#home">Home</a>
+    <a href="#categories">Categories</a>
+    <a href="#products">Jewellery</a>
+    <a href="#bridal">Bridal Collection</a>
+    <a href="#payment">Payment</a>
+
+  </nav>
+
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+
+    <div class="hero-content">
+
+      <span class="hero-small">ROYAL JEWELLERY COLLECTION</span>
+
+      <h2>
+        हर नारी के श्रृंगार की
+        <br>
+        <strong>खूबसूरत पहचान</strong>
+      </h2>
+
+      <p>
+        शानदार Artificial Jewellery Collection —
+        शादी, पार्टी और हर खास मौके के लिए।
+      </p>
+
+      <a href="#products" class="hero-button">
+        अभी Shopping करें →
+      </a>
+
+    </div>
+
+    <div class="hero-jewellery">
+      💎
+    </div>
+
+  </section>
+
+
+  <!-- CATEGORIES -->
+  <section class="section" id="categories">
+
+    <div class="section-heading">
+      <span>SHOP BY CATEGORY</span>
+      <h2>अपना पसंदीदा सिंगार चुनें</h2>
+    </div>
+
+    <div class="category-grid">
+
+      <button class="category-card" onclick="filterCategory('Necklace')">
+        <div>📿</div>
+        <h3>हार / Necklace</h3>
+        <p>Royal Necklace Designs</p>
+      </button>
+
+      <button class="category-card" onclick="filterCategory('Rani Haar')">
+        <div>👑</div>
+        <h3>Rani Haar</h3>
+        <p>Royal Bridal Collection</p>
+      </button>
+
+      <button class="category-card" onclick="filterCategory('Earrings')">
+        <div>💎</div>
+        <h3>झुमके</h3>
+        <p>Beautiful Earrings</p>
+      </button>
+
+      <button class="category-card" onclick="filterCategory('Bangles')">
+        <div>⭕</div>
+        <h3>चूड़ियाँ</h3>
+        <p>Designer Bangles</p>
+      </button>
+
+      <button class="category-card" onclick="filterCategory('Bangles')">
+        <div>✨</div>
+        <h3>कंगन</h3>
+        <p>Elegant Kada & Bangles</p>
+      </button>
+
+      <button class="category-card" onclick="filterCategory('Rings')">
+        <div>💍</div>
+        <h3>अंगूठियाँ</h3>
+        <p>Beautiful Rings</p>
+      </button>
+
+      <button class="category-card" onclick="filterCategory('Maang Tikka')">
+        <div>👸</div>
+        <h3>मांग टीका</h3>
+        <p>Bridal Maang Tikka</p>
+      </button>
+
+      <button class="category-card" onclick="filterCategory('Nose Ring')">
+        <div>🌸</div>
+        <h3>नथ</h3>
+        <p>Traditional Nose Rings</p>
+      </button>
+
+      <button class="category-card" onclick="filterCategory('Payal')">
+        <div>✨</div>
+        <h3>पायल</h3>
+        <p>Traditional Payal</p>
+      </button>
+
+      <button class="category-card" onclick="filterCategory('Bajuband')">
+        <div>💫</div>
+        <h3>बाजूबंद</h3>
+        <p>Royal Bajuband</p>
+      </button>
+
+      <button class="category-card" onclick="filterCategory('Matha Patti')">
+        <div>👑</div>
+        <h3>माथा पट्टी</h3>
+        <p>Bridal Matha Patti</p>
+      </button>
+
+      <button class="category-card" onclick="filterCategory('Choker')">
+        <div>📿</div>
+        <h3>Choker</h3>
+        <p>Premium Choker Designs</p>
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- PRODUCTS -->
+  <section class="section products-section" id="products">
+
+    <div class="section-heading">
+      <span>OUR COLLECTION</span>
+      <h2>खास Jewellery Collection</h2>
+      <p>आपके हर खास अवसर के लिए खूबसूरत Designs</p>
+    </div>
+
+    <div class="product-grid" id="productGrid">
+
+      <!-- PRODUCT 1 -->
+      <article class="product-card" data-category="Necklace">
+
+        <div class="product-image">
+          <img
+            src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=700&q=85"
+            alt="Royal Necklace"
+          >
+          <span class="product-badge">BESTSELLER</span>
+        </div>
+
+        <div class="product-info">
+          <p class="product-category">Necklace</p>
+          <h3>Royal Kundan Necklace Set</h3>
+          <div class="rating">★★★★★</div>
+          <div class="price">₹1,499</div>
+          <button
+            class="add-cart"
+            onclick="addToCart('Royal Kundan Necklace Set',1499)"
+          >
+            🛒 Add to Cart
+          </button>
+        </div>
+
+      </article>
+
+
+      <!-- PRODUCT 2 -->
+      <article class="product-card" data-category="Choker">
+
+        <div class="product-image">
+          <img
+            src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=700&q=85"
+            alt="Choker Jewellery"
+          >
+          <span class="product-badge">NEW</span>
+        </div>
+
+        <div class="product-info">
+          <p class="product-category">Choker</p>
+          <h3>Designer Pearl Choker Set</h3>
+          <div class="rating">★★★★★</div>
+          <div class="price">₹899</div>
+          <button
+            class="add-cart"
+            onclick="addToCart('Designer Pearl Choker Set',899)"
+          >
+            🛒 Add to Cart
+          </button>
+        </div>
+
+      </article>
+
+
+      <!-- PRODUCT 3 -->
+      <article class="product-card" data-category="Earrings">
+
+        <div class="product-image">
+          <img
+            src="https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=700&q=85"
+            alt="Jhumka Earrings"
+          >
+          <span class="product-badge">POPULAR</span>
+        </div>
+
+        <div class="product-info">
+          <p class="product-category">Earrings</p>
+          <h3>Royal Meenakari Jhumka</h3>
+          <div class="rating">★★★★★</div>
+          <div class="price">₹599</div>
+          <button
+            class="add-cart"
+            onclick="addToCart('Royal Meenakari Jhumka',599)"
+          >
+            🛒 Add to Cart
+          </button>
+        </div>
+
+      </article>
+
+
+      <!-- PRODUCT 4 -->
+      <article class="product-card" data-category="Rings">
+
+        <div class="product-image">
+          <img
+            src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=700&q=85"
+            alt="Designer Ring"
+          >
+        </div>
+
+        <div class="product-info">
+          <p class="product-category">Rings</p>
+          <h3>American Diamond Ring</h3>
+          <div class="rating">★★★★★</div>
+          <div class="price">₹399</div>
+          <button
+            class="add-cart"
+            onclick="addToCart('American Diamond Ring',399)"
+          >
+            🛒 Add to Cart
+          </button>
+        </div>
+
+      </article>
+
+
+      <!-- PRODUCT 5 -->
+      <article class="product-card" data-category="Bangles">
+
+        <div class="product-image">
+          <img
+            src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=700&q=85"
+            alt="Bangles"
+          >
+        </div>
+
+        <div class="product-info">
+          <p class="product-category">Bangles</p>
+          <h3>Bridal Designer Bangles</h3>
+          <div class="rating">★★★★★</div>
+          <div class="price">₹749</div>
+          <button
+            class="add-cart"
+            onclick="addToCart('Bridal Designer Bangles',749)"
+          >
+            🛒 Add to Cart
+          </button>
+        </div>
+
+      </article>
+
+
+      <!-- PRODUCT 6 -->
+      <article class="product-card" data-category="Maang Tikka">
+
+        <div class="product-image">
+          <img
+            src="https://images.unsplash.com/photo-1619119069152-a2b331eb392a?auto=format&fit=crop&w=700&q=85"
+            alt="Maang Tikka"
+          >
+        </div>
+
+        <div class="product-info">
+          <p class="product-category">Maang Tikka</p>
+          <h3>Bridal Kundan Maang Tikka</h3>
+          <div class="rating">★★★★★</div>
+          <div class="price">₹549</div>
+          <button
+            class="add-cart"
+            onclick="addToCart('Bridal Kundan Maang Tikka',549)"
+          >
+            🛒 Add to Cart
+          </button>
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- BRIDAL -->
+  <section class="bridal-section" id="bridal">
+
+    <div class="bridal-content">
+
+      <span>BRIDAL SPECIAL</span>
+
+      <h2>दुल्हन के सिंगार का<br>पूरा Collection</h2>
+
+      <p>
+        Rani Haar • Choker • Jhumka • Maang Tikka •
+        Nath • Bajuband • Matha Patti • Bangles
+      </p>
+
+      <a href="#products" class="hero-button">
+        Bridal Collection देखें
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- PAYMENT -->
+  <section class="payment-section" id="payment">
+
+    <div class="section-heading">
+
+      <span>SECURE ONLINE PAYMENT</span>
+
+      <h2>सुरक्षित Online Payment</h2>
+
+      <p>
+        आपका Order केवल सफल Online Payment के बाद ही Confirm होगा।
+      </p>
+
+    </div>
+
+    <div class="payment-grid">
+
+      <div class="payment-card">
+        <div>📱</div>
+        <h3>UPI</h3>
+        <p>UPI से सुरक्षित भुगतान</p>
+      </div>
+
+      <div class="payment-card">
+        <div>💳</div>
+        <h3>Debit / Credit Card</h3>
+        <p>Cards से सुरक्षित Payment</p>
+      </div>
+
+      <div class="payment-card">
+        <div>🏦</div>
+        <h3>Net Banking</h3>
+        <p>अपने Bank से भुगतान करें</p>
+      </div>
+
+    </div>
+
+    <div class="no-cod">
+      🚫 <strong>Cash on Delivery उपलब्ध नहीं है</strong>
+      <br>
+      केवल Online Payment के बाद Order Confirm होगा।
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+
+    <div class="footer-brand">
+      <h2>बाईसा का सिंगार</h2>
+      <p>आपके सिंगार की खूबसूरत पहचान ✨</p>
+    </div>
+
+    <div class="footer-links">
+
+      <a href="#home">Home</a>
+      <a href="#categories">Categories</a>
+      <a href="#products">Jewellery</a>
+      <a href="#bridal">Bridal</a>
+
+    </div>
+
+    <div class="footer-payment">
+      🔒 Secure Online Payment Only
+    </div>
+
+    <p class="copyright">
+      © 2026 बाईसा का सिंगार. All Rights Reserved.
+    </p>
+
+  </footer>
+
+
+  <!-- CART -->
+  <div id="cartModal" class="cart-modal">
+
+    <div class="cart-box">
+
+      <button class="close-cart" onclick="closeCart()">×</button>
+
+      <h2>🛒 Shopping Cart</h2>
+
+      <div id="cartItems">
+        <p>आपका Cart अभी खाली है।</p>
+      </div>
+
+      <div class="cart-total">
+        Total: ₹<span id="cartTotal">0</span>
+      </div>
+
+      <button class="checkout-button" onclick="checkout()">
+        🔒 Secure Checkout
+      </button>
+
+      <p class="cart-note">
+        COD उपलब्ध नहीं है। केवल सफल Online Payment के बाद Order Confirm होगा।
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
