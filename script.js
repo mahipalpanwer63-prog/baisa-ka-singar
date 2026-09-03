@@ -760,3 +760,39 @@ function checkout() {
 updateCartCount();
 
 showCategory(0);
+function checkout() {
+  if (cart.length === 0) {
+    alert("पहले कोई Jewellery Add करें ❤️");
+    return;
+  }
+
+  const total = cart.reduce((sum, item) => {
+    return sum + (item.price * item.qty);
+  }, 0);
+
+  document.getElementById("paymentAmount").textContent =
+    "₹" + total.toLocaleString("en-IN");
+
+  closeModal("cartModal");
+
+  document.getElementById("payment").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+function paymentDone() {
+  const total = cart.reduce((sum, item) => {
+    return sum + (item.price * item.qty);
+  }, 0);
+
+  const message =
+    "Hello Baisa Ka Singar,%0A%0A" +
+    "I have completed my online payment.%0A" +
+    "Order Amount: ₹" +
+    total.toLocaleString("en-IN");
+
+  window.open(
+    "https://wa.me/917568496499?text=" + message,
+    "_blank"
+  );
+}
