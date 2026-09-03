@@ -1,1 +1,63 @@
-<!doctype html><html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>बाईसा का श्रृंगार</title><link rel="stylesheet" href="style.css"></head><body><div class="top">✨ सामान की <b>5 साल कलर गारंटी</b> • Premium Artificial Jewellery</div><header><a class="brand" href="#"><img src="images/logo.svg"><span><b>बाईसा का श्रृंगार</b><small>Premium Artificial Jewellery</small></span></a><nav><a href="#cats">Categories</a><a href="#products">Jewellery</a><a href="admin.html">Admin</a></nav><button onclick="cartOpen()">🛒 Cart <b id="cc">0</b></button></header><main><section class="hero"><div><small class="eyebrow">ROYAL • ELEGANT • AFFORDABLE</small><h1>हर बाईसा के श्रृंगार के लिए<br><span>खूबसूरत आभूषण</span></h1><p>हार, कड़े, अंगूठियाँ, माथा पट्टी और नए कलेक्शन — घर बैठे ऑर्डर करें।</p><a class="btn" href="#cats">कलेक्शन देखें</a></div><img class="heroimg" src="images/jewellery-hero.svg"></section><section id="cats"><div class="head"><div><small class="eyebrow">OUR COLLECTION</small><h2>श्रेणियाँ</h2></div></div><div id="catsGrid" class="grid4"></div></section><section id="products"><div class="head"><div><small class="eyebrow">LATEST DESIGNS</small><h2 id="ph">सभी डिज़ाइन्स</h2></div></div><div id="pg" class="grid4"></div></section><section><div class="head"><div><small class="eyebrow">ORDER TRACKING</small><h2>मेरे ऑर्डर</h2></div></div><div id="orders"></div></section></main><div id="modal" class="modal hidden"><div class="box"><button class="x" onclick="closeM()">×</button><div id="mcontent"></div></div></div><div id="toast" class="toast"></div><script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>बाईसा का श्रृंगार | Premium Artificial Jewellery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="guarantee">✨ सामान की 5 साल कलर गारंटी ✨ <span>| Premium Artificial Jewellery</span></div>
+<header>
+  <div class="header-inner">
+    <a class="brand" href="#"><img src="images/logo.svg" alt="बाईसा का श्रृंगार"></a>
+    <nav>
+      <a class="active" href="#home">⌂ होम</a><a href="#categories">▦ कैटेगरी</a><a href="#products">♢ ज्वेलरी</a><a href="#about">हमारे बारे में</a><a href="#contact">भुगतान</a>
+    </nav>
+    <div class="head-actions"><button class="icon-btn">♡</button><button class="cart" onclick="openCart()">🛒 कार्ट <b id="cartCount">0</b></button></div>
+  </div>
+</header>
+
+<main>
+<section id="home" class="hero">
+  <div class="hero-copy">
+    <div class="eyebrow">ROYAL • ELEGANT • AFFORDABLE</div>
+    <h1>बाईसा का<br><strong>श्रृंगार</strong></h1>
+    <p>हर बाईसा के श्रृंगार के लिए खूबसूरत आभूषण</p>
+    <p class="hero-list">हार • कड़े • अंगूठियाँ • माथा पट्टी • पायल • नथ • गिफ्ट आइटम</p>
+    <div class="trust">✨ Premium Quality &nbsp;|&nbsp; 💎 Elegant Designs &nbsp;|&nbsp; 💗 Trusted Service</div>
+    <div class="guarantee-box">🛡️ सामान की <b>5 साल कलर गारंटी</b></div>
+    <a class="primary" href="#categories">कलेक्शन देखें</a>
+  </div>
+  <div class="hero-photo"><img src="images/bride-hero.png" alt="शानदार दुल्हन और आर्टिफिशियल ज्वेलरी"></div>
+</section>
+
+<section id="categories" class="section">
+  <div class="section-title"><span>हमारा कलेक्शन</span><h2>श्रेणियाँ</h2></div>
+  <div id="categoryGrid" class="categories"></div>
+</section>
+
+<section id="products" class="section products-section">
+  <div class="section-title"><span>OUR COLLECTION</span><h2>लोकप्रिय डिज़ाइन्स</h2></div>
+  <div class="filters"><button class="filter active" onclick="filterProducts('all',this)">सभी</button><button class="filter" onclick="filterProducts('silver',this)">Silver</button><button class="filter" onclick="filterProducts('gold',this)">Gold</button></div>
+  <div id="productGrid" class="products"></div>
+</section>
+
+<section class="benefits">
+  <div>🚚 <b>फ्री शिपिंग</b><small>₹999 से अधिक के ऑर्डर पर</small></div>
+  <div>🛡️ <b>सुरक्षित भुगतान</b><small>100% सुरक्षित भुगतान</small></div>
+  <div>↩️ <b>7 दिन रिटर्न</b><small>आसान रिटर्न पॉलिसी</small></div>
+  <div>🎧 <b>ग्राहक सहायता</b><small>24x7 सहायता उपलब्ध</small></div>
+  <div>✨ <b>बेहतरीन क्वालिटी</b><small>5 साल कलर गारंटी</small></div>
+</section>
+
+<section id="about" class="about section"><h2>बाईसा का श्रृंगार</h2><p>राजस्थानी अंदाज़ और आधुनिक डिज़ाइन का खूबसूरत संगम। आप अपने पसंदीदा डिज़ाइन चुनें, कीमत देखें और घर बैठे ऑर्डर करें।</p></section>
+</main>
+
+<footer id="contact"><div><b>बाईसा का श्रृंगार</b><br>Premium Artificial Jewellery</div><div>💳 केवल UPI Payment</div><div>© 2026 Baisa Ka Shringar</div></footer>
+
+<div id="cartModal" class="modal"><div class="modal-card"><button class="close" onclick="closeCart()">×</button><h2>आपकी कार्ट</h2><div id="cartItems"></div><div class="total">कुल: ₹<span id="cartTotal">0</span></div><button class="primary full" onclick="checkout()">ऑर्डर करें</button></div></div>
+
+<script src="script.js"></script>
+</body></html>

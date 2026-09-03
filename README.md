@@ -1,7 +1,17 @@
-# बाईसा का श्रृंगार — Full Website + Admin Panel
+BAISA KA SHRINGAR - PREMIUM WEBSITE
+Files:
+- index.html : customer website
+- admin.html : admin panel
+- style.css / script.js
+- images/logo.svg
+- images/bride-hero.png
 
-Admin: `admin.html` (default password `123456`)
+Admin panel:
+admin.html
+Customer:
+index.html
 
-Admin से categories/folders, products, photos, rates, stock, UPI ID, QR और WhatsApp number manage कर सकते हैं। Customer checkout में नाम, mobile, current GPS location, पूरा address, city और PIN लिया जाता है। Payment के बाद UTR admin में आता है और admin manually verify करता है।
+Note: This is a front-end demo/admin UI. Real bank-side automatic UTR verification requires a payment gateway/backend.
 
-**Important:** यह GitHub Pages compatible frontend/demo है। UTR का automatic bank verification नहीं है। Production में Razorpay/Cashfree/PhonePe जैसे gateway + secure backend/database/webhooks जोड़ना चाहिए।
+
+Payment: केवल UPI. WhatsApp payment/contact system हटाया गया है. Admin Panel में अपनी UPI ID डालें.
