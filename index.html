@@ -1,100 +1,719 @@
-<!DOCTYPE html>
-<html lang="hi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>बाईसा का सिंगार | Premium Artificial Jewellery</title>
-  <meta name="description" content="बाईसा का सिंगार — Premium Artificial Jewellery, Bridal Collection और COD">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="topbar">✨ बाईसा का सिंगार • Premium Artificial Jewellery • COD • देशभर में डिलीवरी</div>
+const categories = [
+  {
+    name: "हार / Necklace",
+    desc: "Royal Necklace Designs",
+    icon: "💎",
+    keyword: "necklace,jewelry"
+  },
+  {
+    name: "Rani Haar",
+    desc: "Royal Bridal Collection",
+    icon: "👑",
+    keyword: "indian,necklace,jewelry"
+  },
+  {
+    name: "झुमके",
+    desc: "Beautiful Earrings",
+    icon: "💎",
+    keyword: "earrings,jewelry"
+  },
+  {
+    name: "चूड़ियाँ",
+    desc: "Designer Bangles",
+    icon: "⭕",
+    keyword: "bangles,jewelry"
+  },
+  {
+    name: "कंगन",
+    desc: "Elegant Kada & Bangles",
+    icon: "✨",
+    keyword: "bracelet,bangles,jewelry"
+  },
+  {
+    name: "अंगूठियाँ",
+    desc: "Beautiful Rings",
+    icon: "💍",
+    keyword: "ring,jewelry"
+  },
+  {
+    name: "मांग टीका",
+    desc: "Bridal Maang Tikka",
+    icon: "👸",
+    keyword: "maang,tikka,jewelry"
+  },
+  {
+    name: "नथ",
+    desc: "Traditional Nose Rings",
+    icon: "🌸",
+    keyword: "nose-ring,jewelry"
+  },
+  {
+    name: "पायल",
+    desc: "Traditional Payal",
+    icon: "✨",
+    keyword: "anklet,jewelry"
+  },
+  {
+    name: "बाजूबंद",
+    desc: "Royal Bajuband",
+    icon: "〰️",
+    keyword: "armlet,jewelry"
+  },
+  {
+    name: "माथा पट्टी",
+    desc: "Bridal Matha Patti",
+    icon: "👑",
+    keyword: "bridal,headpiece,jewelry"
+  },
+  {
+    name: "Choker",
+    desc: "Premium Choker Designs",
+    icon: "💎",
+    keyword: "choker,jewelry"
+  }
+];
 
-  <header class="header">
-    <div class="brand">
-      <div class="brand-mark">👑</div>
-      <div>
-        <h1>बाईसा का सिंगार</h1>
-        <p>Premium Artificial Jewellery</p>
+const priceBase = [
+  499,
+  699,
+  899,
+  1099,
+  1299,
+  1499,
+  1699,
+  1999,
+  2299,
+  2499
+];
+
+/*
+  IMPORTANT:
+  हर category के लिए अलग keyword है।
+  इसलिए Ring में Ring वाली image,
+  Necklace में Necklace वाली image,
+  Nath में Nose Ring वाली image आएगी।
+*/
+
+function makeImage(keyword, uniqueNumber) {
+  return `https://loremflickr.com/900/1100/${keyword}?lock=${uniqueNumber}`;
+}
+
+let products = [];
+
+categories.forEach((category, categoryIndex) => {
+
+  for (let i = 1; i <= 50; i++) {
+
+    const productId = categoryIndex * 50 + i;
+
+    let productName = "";
+
+    switch (categoryIndex) {
+
+      case 0:
+        productName = `Royal Necklace Design ${String(i).padStart(2, "0")}`;
+        break;
+
+      case 1:
+        productName = `Royal Rani Haar Design ${String(i).padStart(2, "0")}`;
+        break;
+
+      case 2:
+        productName = `Designer Jhumka Design ${String(i).padStart(2, "0")}`;
+        break;
+
+      case 3:
+        productName = `Designer Chudi Design ${String(i).padStart(2, "0")}`;
+        break;
+
+      case 4:
+        productName = `Elegant Kangan Design ${String(i).padStart(2, "0")}`;
+        break;
+
+      case 5:
+        productName = `Premium Ring Design ${String(i).padStart(2, "0")}`;
+        break;
+
+      case 6:
+        productName = `Bridal Maang Tikka Design ${String(i).padStart(2, "0")}`;
+        break;
+
+      case 7:
+        productName = `Traditional Nath Design ${String(i).padStart(2, "0")}`;
+        break;
+
+      case 8:
+        productName = `Traditional Payal Design ${String(i).padStart(2, "0")}`;
+        break;
+
+      case 9:
+        productName = `Royal Bajuband Design ${String(i).padStart(2, "0")}`;
+        break;
+
+      case 10:
+        productName = `Bridal Matha Patti Design ${String(i).padStart(2, "0")}`;
+        break;
+
+      case 11:
+        productName = `Premium Choker Design ${String(i).padStart(2, "0")}`;
+        break;
+    }
+
+    const price =
+      priceBase[(i - 1) % priceBase.length] +
+      categoryIndex * 50 +
+      (i % 5) * 25;
+
+    products.push({
+      id: productId,
+
+      cat: category.name,
+
+      catIndex: categoryIndex,
+
+      name: productName,
+
+      desc:
+        `Premium ${category.name} jewellery — शादी, पार्टी, त्योहार और special occasions के लिए elegant design.`,
+
+      price: price,
+
+      img: makeImage(
+        category.keyword,
+        1000 + productId
+      )
+    });
+  }
+});
+
+
+/* =========================
+   CART
+========================= */
+
+let activeCategory = null;
+
+let cart = JSON.parse(
+  localStorage.getItem("baisaCart") || "[]"
+);
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const categoryGrid =
+  document.getElementById("categoryGrid");
+
+const productGrid =
+  document.getElementById("productGrid");
+
+const search =
+  document.getElementById("search");
+
+
+/* =========================
+   CATEGORY CARDS
+========================= */
+
+categoryGrid.innerHTML = categories
+  .map((category, index) => {
+
+    return `
+      <div
+        class="category"
+        onclick="showCategory(${index})"
+      >
+
+        <div class="emoji">
+          ${category.icon}
+        </div>
+
+        <h3>
+          ${category.name}
+        </h3>
+
+        <p>
+          ${category.desc}
+        </p>
+
+        <p>
+          <b>50 Designs</b>
+        </p>
+
       </div>
-    </div>
-    <div class="header-actions">
-      <div class="search-wrap">🔍 <input id="search" type="search" placeholder="Jewellery खोजें..."></div>
-      <button class="cart-btn" onclick="openCart()">🛒 Cart <span id="cartCount">0</span></button>
-    </div>
-  </header>
+    `;
 
-  <nav class="nav">
-    <a href="#home">Home</a>
-    <a href="#categories">Categories</a>
-    <a href="#collection">Jewellery</a>
-    <a href="#collection">Bridal Collection</a>
-    <a href="#payment">Payment</a>
-  </nav>
+  })
+  .join("");
 
-  <main id="home">
-    <section class="hero">
-      <div>
-        <span class="eyebrow">ROYAL JEWELLERY COLLECTION</span>
-        <h2>हर नारी के श्रृंगार की<br><b>खूबसूरत पहचान</b> 💎</h2>
-        <p>शानदार Artificial Jewellery Collection — शादी, पार्टी और हर खास मौके के लिए।</p>
-        <button class="primary" onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})">अभी Shopping करें →</button>
-      </div>
-      <div class="hero-crown">👑</div>
-    </section>
 
-    <section id="categories" class="section">
-      <span class="section-kicker">SHOP BY CATEGORY</span>
-      <h2>अपना पसंदीदा सिंगार चुनें</h2>
-      <div id="categoryGrid" class="category-grid"></div>
-    </section>
+/* =========================
+   RENDER PRODUCTS
+========================= */
 
-    <section id="collection" class="section">
-      <span class="section-kicker">OUR COLLECTION</span>
-      <h2 id="collectionTitle">खास Jewellery Collection</h2>
-      <div class="collection-toolbar">
-        <span id="productInfo">240+ Designs</span>
-        <button class="small-btn" onclick="showAll()">सभी Designs</button>
-      </div>
-      <div id="productGrid" class="product-grid"></div>
-    </section>
+function renderProducts(list = products) {
 
-    <section id="payment" class="payment-strip">
-      <div><b>🛍️ आसान Shopping</b><span>Secure Cart • COD Available</span></div>
-      <div><b>🚚 Delivery</b><span>India-wide delivery</span></div>
-      <div><b>💳 Payment</b><span>UPI / COD / Online</span></div>
-    </section>
-  </main>
+  document.getElementById(
+    "productInfo"
+  ).textContent =
+    `${list.length} Designs`;
 
-  <div id="productModal" class="modal hidden">
-    <div class="modal-card product-modal">
-      <button class="close" onclick="closeModal('productModal')">×</button>
-      <img id="modalImg" alt="">
-      <div class="modal-content">
-        <span id="modalCat" class="pill"></span>
-        <h2 id="modalName"></h2>
-        <p id="modalDesc"></p>
-        <div class="price-row"><strong id="modalPrice"></strong><span>✓ COD Available</span></div>
-        <button class="primary full" id="modalAdd">🛒 Add to Cart</button>
-      </div>
-    </div>
-  </div>
+  productGrid.innerHTML =
+    list
+      .map(product => {
 
-  <div id="cartModal" class="modal hidden">
-    <div class="modal-card cart-modal">
-      <button class="close" onclick="closeModal('cartModal')">×</button>
-      <h2>🛒 आपका Cart</h2>
-      <div id="cartItems"></div>
-      <div class="cart-total"><span>Total</span><strong id="cartTotal">₹0</strong></div>
-      <button class="primary full" onclick="checkout()">Order / Payment →</button>
-    </div>
-  </div>
+        return `
+          <article
+            class="product"
+            onclick="openProduct(${product.id})"
+          >
 
-  <footer>
-    <b>बाईसा का सिंगार</b> • Premium Artificial Jewellery
-    <small>© 2026 Baisa Ka Singar</small>
-  </footer>
+            <img
+              src="${product.img}"
+              alt="${product.name}"
+              loading="lazy"
+            >
 
-  <script src="script.js"></script>
-</body>
-</html>
+            <div class="product-body">
+
+              <div class="product-cat">
+                ${product.cat}
+              </div>
+
+              <h3>
+                ${product.name}
+              </h3>
+
+              <div class="product-bottom">
+
+                <span class="price">
+                  ₹${product.price.toLocaleString("en-IN")}
+                </span>
+
+                <button
+                  class="add"
+                  onclick="
+                    event.stopPropagation();
+                    addToCart(${product.id})
+                  "
+                >
+                  Add
+                </button>
+
+              </div>
+
+            </div>
+
+          </article>
+        `;
+
+      })
+      .join("");
+}
+
+
+/* =========================
+   SHOW CATEGORY
+========================= */
+
+function showCategory(index) {
+
+  activeCategory = index;
+
+  const category =
+    categories[index];
+
+  document.getElementById(
+    "collectionTitle"
+  ).textContent =
+    `${category.name} — ${category.desc}`;
+
+  const categoryProducts =
+    products.filter(
+      product =>
+        product.catIndex === index
+    );
+
+  renderProducts(categoryProducts);
+
+  document
+    .getElementById("collection")
+    .scrollIntoView({
+      behavior: "smooth"
+    });
+}
+
+
+/* =========================
+   SHOW ALL
+========================= */
+
+function showAll() {
+
+  activeCategory = null;
+
+  document.getElementById(
+    "collectionTitle"
+  ).textContent =
+    "खास Jewellery Collection";
+
+  renderProducts(products);
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+search.addEventListener(
+  "input",
+  () => {
+
+    const query =
+      search.value
+        .trim()
+        .toLowerCase();
+
+    if (!query) {
+
+      if (activeCategory === null) {
+        showAll();
+      } else {
+        showCategory(activeCategory);
+      }
+
+      return;
+    }
+
+    let searchList;
+
+    if (activeCategory === null) {
+
+      searchList =
+        products.filter(product =>
+          (
+            product.name +
+            " " +
+            product.cat +
+            " " +
+            product.desc
+          )
+            .toLowerCase()
+            .includes(query)
+        );
+
+    } else {
+
+      searchList =
+        products.filter(product =>
+          product.catIndex === activeCategory &&
+          (
+            product.name +
+            " " +
+            product.cat +
+            " " +
+            product.desc
+          )
+            .toLowerCase()
+            .includes(query)
+        );
+    }
+
+    document.getElementById(
+      "collectionTitle"
+    ).textContent =
+      "Search Results";
+
+    renderProducts(searchList);
+  }
+);
+
+
+/* =========================
+   OPEN PRODUCT
+========================= */
+
+function openProduct(id) {
+
+  const product =
+    products.find(
+      item => item.id === id
+    );
+
+  if (!product) return;
+
+  document.getElementById(
+    "modalImg"
+  ).src = product.img;
+
+  document.getElementById(
+    "modalImg"
+  ).alt = product.name;
+
+  document.getElementById(
+    "modalCat"
+  ).textContent = product.cat;
+
+  document.getElementById(
+    "modalName"
+  ).textContent = product.name;
+
+  document.getElementById(
+    "modalDesc"
+  ).textContent = product.desc;
+
+  document.getElementById(
+    "modalPrice"
+  ).textContent =
+    "₹" +
+    product.price.toLocaleString("en-IN");
+
+  document.getElementById(
+    "modalAdd"
+  ).onclick = () => {
+
+    addToCart(product.id);
+
+    closeModal("productModal");
+
+  };
+
+  document
+    .getElementById("productModal")
+    .classList.remove("hidden");
+}
+
+
+/* =========================
+   ADD TO CART
+========================= */
+
+function addToCart(id) {
+
+  const product =
+    products.find(
+      item => item.id === id
+    );
+
+  if (!product) return;
+
+  const found =
+    cart.find(
+      item => item.id === id
+    );
+
+  if (found) {
+
+    found.qty++;
+
+  } else {
+
+    cart.push({
+      id: product.id,
+      qty: 1
+    });
+
+  }
+
+  saveCart();
+}
+
+
+/* =========================
+   SAVE CART
+========================= */
+
+function saveCart() {
+
+  localStorage.setItem(
+    "baisaCart",
+    JSON.stringify(cart)
+  );
+
+  document.getElementById(
+    "cartCount"
+  ).textContent =
+    cart.reduce(
+      (total, item) =>
+        total + item.qty,
+      0
+    );
+}
+
+
+/* =========================
+   OPEN CART
+========================= */
+
+function openCart() {
+
+  const box =
+    document.getElementById(
+      "cartItems"
+    );
+
+  if (!cart.length) {
+
+    box.innerHTML = `
+      <p>
+        Cart अभी खाली है।
+        Jewellery select करके Add करें 💎
+      </p>
+    `;
+
+  } else {
+
+    box.innerHTML =
+      cart
+        .map(item => {
+
+          const product =
+            products.find(
+              p => p.id === item.id
+            );
+
+          if (!product) return "";
+
+          return `
+            <div class="cart-row">
+
+              <img
+                src="${product.img}"
+                alt="${product.name}"
+              >
+
+              <div>
+
+                <h4>
+                  ${product.name}
+                </h4>
+
+                <p>
+                  ₹${product.price.toLocaleString("en-IN")}
+                  × ${item.qty}
+                </p>
+
+              </div>
+
+              <button
+                class="remove"
+                onclick="removeCart(${product.id})"
+              >
+                Remove
+              </button>
+
+            </div>
+          `;
+
+        })
+        .join("");
+  }
+
+  const total =
+    cart.reduce(
+      (sum, item) => {
+
+        const product =
+          products.find(
+            p => p.id === item.id
+          );
+
+        return sum +
+          (product
+            ? product.price * item.qty
+            : 0);
+
+      },
+      0
+    );
+
+  document.getElementById(
+    "cartTotal"
+  ).textContent =
+    "₹" +
+    total.toLocaleString("en-IN");
+
+  document
+    .getElementById("cartModal")
+    .classList.remove("hidden");
+}
+
+
+/* =========================
+   REMOVE CART
+========================= */
+
+function removeCart(id) {
+
+  cart =
+    cart.filter(
+      item => item.id !== id
+    );
+
+  saveCart();
+
+  openCart();
+}
+
+
+/* =========================
+   CLOSE MODAL
+========================= */
+
+function closeModal(id) {
+
+  document
+    .getElementById(id)
+    .classList.add("hidden");
+}
+
+
+/* =========================
+   CHECKOUT
+========================= */
+
+function checkout() {
+
+  if (!cart.length) {
+
+    alert(
+      "Cart खाली है।"
+    );
+
+    return;
+  }
+
+  alert(
+    "Order/Payment integration के लिए UPI ID या payment gateway जोड़ना होगा। अभी आपका cart तैयार है।"
+  );
+}
+
+
+/* =========================
+   INITIAL LOAD
+========================= */
+
+renderProducts(products);
+
+saveCart();
+
+
+/* =========================
+   TOTAL DESIGNS
+========================= */
+
+console.log(
+  "Total Products:",
+  products.length
+);
+
+console.log(
+  "Categories:",
+  categories.length
+);
+
+console.log(
+  "50 designs per category:",
+  products.length === categories.length * 50
+);
