@@ -1,299 +1,38 @@
-<!DOCTYPE html>
-<html lang="hi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<section id="payment" class="payment-section">
+  <div class="payment-box">
+    <span class="section-kicker">SECURE ONLINE PAYMENT</span>
 
-  <title>बाईसा का सिंगार | Premium Artificial Jewellery</title>
+    <h2>ऑनलाइन Payment करें 💳</h2>
 
-  <meta
-    name="description"
-    content="बाईसा का सिंगार — Premium Artificial Jewellery, Bridal Collection और COD"
-  >
+    <p class="payment-subtitle">
+      नीचे दिए गए QR Code को किसी भी UPI App से Scan करें
+    </p>
 
-  <link rel="stylesheet" href="style.css">
-</head>
+    <div class="qr-box">
+      <img src="payment-qr.jpg" alt="UPI Payment QR Code">
+    </div>
 
-<body>
+    <h3>📱 Scan & Pay</h3>
 
-  <div class="topbar">
-    ✨ बाईसा का सिंगार • Premium Artificial Jewellery • COD • पूरे भारत में Delivery
+    <p class="payment-note">
+      Google Pay • PhonePe • Paytm • BHIM • Any UPI App
+    </p>
+
+    <div class="payment-amount">
+      <span>Order Amount</span>
+      <strong id="paymentAmount">₹0</strong>
+    </div>
+
+    <button class="primary full" onclick="paymentDone()">
+      ✅ मैंने Payment कर दिया
+    </button>
+
+    <a
+      class="whatsapp-payment"
+      href="https://wa.me/917568496499?text=Hello%20Baisa%20Ka%20Singar,%20I%20have%20completed%20my%20online%20payment."
+      target="_blank"
+    >
+      📲 Payment Screenshot WhatsApp पर भेजें
+    </a>
   </div>
-
-  <header class="header">
-
-    <div class="brand">
-      <div class="brand-mark">👑</div>
-
-      <div>
-        <h1>बाईसा का सिंगार</h1>
-        <p>Premium Artificial Jewellery</p>
-      </div>
-    </div>
-
-    <div class="header-actions">
-
-      <div class="search-wrap">
-        🔍
-        <input
-          id="search"
-          type="search"
-          placeholder="Jewellery खोजें..."
-        >
-      </div>
-
-      <button class="cart-btn" onclick="openCart()">
-        🛒 Cart
-        <span id="cartCount">0</span>
-      </button>
-
-    </div>
-
-  </header>
-
-
-  <nav class="nav">
-
-    <a href="#home">Home</a>
-    <a href="#categories">Categories</a>
-    <a href="#collection">Jewellery</a>
-    <a href="#collection">Bridal Collection</a>
-    <a href="#payment">Payment</a>
-
-  </nav>
-
-
-  <main id="home">
-
-    <!-- HERO -->
-
-    <section class="hero">
-
-      <div class="hero-content">
-
-        <span class="eyebrow">
-          ROYAL JEWELLERY COLLECTION
-        </span>
-
-        <h2>
-          हर नारी के श्रृंगार की
-          <br>
-          <b>खूबसूरत पहचान</b> 💎
-        </h2>
-
-        <p>
-          शानदार Artificial Jewellery Collection —
-          शादी, पार्टी और हर खास मौके के लिए।
-        </p>
-
-        <button
-          class="primary"
-          onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})"
-        >
-          अभी Shopping करें →
-        </button>
-
-      </div>
-
-      <div class="hero-crown">
-        👑
-      </div>
-
-    </section>
-
-
-    <!-- CATEGORY -->
-
-    <section id="categories" class="section">
-
-      <span class="section-kicker">
-        SHOP BY CATEGORY
-      </span>
-
-      <h2>
-        अपना पसंदीदा सिंगार चुनें
-      </h2>
-
-      <div
-        id="categoryGrid"
-        class="category-grid"
-      ></div>
-
-    </section>
-
-
-    <!-- PRODUCTS -->
-
-    <section id="collection" class="section">
-
-      <span class="section-kicker">
-        OUR COLLECTION
-      </span>
-
-      <h2 id="collectionTitle">
-        खास Jewellery Collection
-      </h2>
-
-      <div class="collection-toolbar">
-
-        <span id="productInfo">
-          600 Designs
-        </span>
-
-        <button
-          class="small-btn"
-          onclick="showAll()"
-        >
-          सभी Designs
-        </button>
-
-      </div>
-
-      <div
-        id="productGrid"
-        class="product-grid"
-      ></div>
-
-    </section>
-
-
-    <!-- PAYMENT -->
-
-    <section id="payment" class="payment-strip">
-
-      <div>
-        <b>🛍️ आसान Shopping</b>
-        <span>Secure Cart • COD Available</span>
-      </div>
-
-      <div>
-        <b>🚚 Delivery</b>
-        <span>India-wide Delivery</span>
-      </div>
-
-      <div>
-        <b>💳 Payment</b>
-        <span>UPI / COD / Online</span>
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- PRODUCT MODAL -->
-
-  <div
-    id="productModal"
-    class="modal hidden"
-  >
-
-    <div class="modal-card product-modal">
-
-      <button
-        class="close"
-        onclick="closeModal('productModal')"
-      >
-        ×
-      </button>
-
-      <img
-        id="modalImg"
-        alt=""
-      >
-
-      <div class="modal-content">
-
-        <span
-          id="modalCat"
-          class="pill"
-        ></span>
-
-        <h2 id="modalName"></h2>
-
-        <p id="modalDesc"></p>
-
-        <div class="price-row">
-
-          <strong id="modalPrice"></strong>
-
-          <span>
-            ✓ COD Available
-          </span>
-
-        </div>
-
-        <button
-          class="primary full"
-          id="modalAdd"
-        >
-          🛒 Add to Cart
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- CART -->
-
-  <div
-    id="cartModal"
-    class="modal hidden"
-  >
-
-    <div class="modal-card cart-modal">
-
-      <button
-        class="close"
-        onclick="closeModal('cartModal')"
-      >
-        ×
-      </button>
-
-      <h2>
-        🛒 आपका Cart
-      </h2>
-
-      <div id="cartItems"></div>
-
-      <div class="cart-total">
-
-        <span>Total</span>
-
-        <strong id="cartTotal">
-          ₹0
-        </strong>
-
-      </div>
-
-      <button
-        class="primary full"
-        onclick="checkout()"
-      >
-        Order / Payment →
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <footer>
-
-    <b>बाईसा का सिंगार</b>
-    • Premium Artificial Jewellery
-
-    <small>
-      © 2026 Baisa Ka Singar
-    </small>
-
-  </footer>
-
-
-  <script src="script.js"></script>
-
-</body>
-</html>
+</section>
