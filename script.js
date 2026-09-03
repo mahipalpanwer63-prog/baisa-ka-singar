@@ -1,344 +1,158 @@
 /* =========================================================
-   BAISA KA SINGAR
-   12 CATEGORIES × 50 SILVER + 50 GOLD
-   TOTAL = 1200 PRODUCTS
+   BAISA KA SINGAR — JEWELLERY STORE
+   100 DESIGNS PER CATEGORY
+   50 SILVER + 50 GOLD
    ========================================================= */
 
-
-/* =========================
-   CATEGORIES
-========================= */
-
 const categories = [
-  ["हार / Necklace", "Royal Necklace Designs", "💎", "necklace"],
-  ["Rani Haar", "Royal Bridal Collection", "👑", "rani-haar"],
-  ["झुमके", "Beautiful Earrings", "💎", "earrings"],
-  ["चूड़ियाँ", "Designer Bangles", "⭕", "bangles"],
-  ["कंगन", "Elegant Kada & Bangles", "✨", "kangan"],
-  ["अंगूठियाँ", "Beautiful Rings", "💍", "rings"],
-  ["मांग टीका", "Bridal Maang Tikka", "👸", "maang-tikka"],
-  ["नथ", "Traditional Nose Rings", "🌸", "nath"],
-  ["पायल", "Traditional Payal", "✨", "payal"],
-  ["बाजूबंद", "Royal Bajuband", "〰️", "bajuband"],
-  ["माथा पट्टी", "Bridal Matha Patti", "👑", "matha-patti"],
-  ["Choker", "Premium Choker Designs", "💎", "choker"]
+  {
+    name: "हार / Necklace",
+    desc: "Royal Necklace Designs",
+    icon: "💎",
+    keyword: "necklace"
+  },
+  {
+    name: "Rani Haar",
+    desc: "Royal Bridal Collection",
+    icon: "👑",
+    keyword: "rani haar necklace"
+  },
+  {
+    name: "झुमके",
+    desc: "Beautiful Earrings",
+    icon: "💎",
+    keyword: "earrings"
+  },
+  {
+    name: "चूड़ियाँ",
+    desc: "Designer Bangles",
+    icon: "⭕",
+    keyword: "bangles"
+  },
+  {
+    name: "कंगन",
+    desc: "Elegant Kada & Bangles",
+    icon: "✨",
+    keyword: "kada bracelet"
+  },
+  {
+    name: "अंगूठियाँ",
+    desc: "Beautiful Rings",
+    icon: "💍",
+    keyword: "rings"
+  },
+  {
+    name: "मांग टीका",
+    desc: "Bridal Maang Tikka",
+    icon: "👸",
+    keyword: "maang tikka"
+  },
+  {
+    name: "नथ",
+    desc: "Traditional Nose Rings",
+    icon: "🌸",
+    keyword: "nose ring"
+  },
+  {
+    name: "पायल",
+    desc: "Traditional Payal",
+    icon: "✨",
+    keyword: "anklet payal"
+  },
+  {
+    name: "बाजूबंद",
+    desc: "Royal Bajuband",
+    icon: "〰️",
+    keyword: "armlet bajuband"
+  },
+  {
+    name: "माथा पट्टी",
+    desc: "Bridal Matha Patti",
+    icon: "👑",
+    keyword: "matha patti"
+  },
+  {
+    name: "Choker",
+    desc: "Premium Choker Designs",
+    icon: "💎",
+    keyword: "choker necklace"
+  }
 ];
 
 
-/* =========================
-   SILVER / GOLD PRICES
-========================= */
+/* =========================================================
+   PRICE SYSTEM
+   ========================================================= */
 
 const silverPrices = [199, 299, 399];
 const goldPrices = [499, 599, 699];
 
 
-/* =========================
-   PRODUCT NAMES
-========================= */
-
-const productNames = {
-
-  "necklace": [
-    "Classic Necklace",
-    "Royal Necklace",
-    "Designer Necklace",
-    "Kundan Necklace",
-    "Bridal Necklace",
-    "Pearl Necklace",
-    "Polki Necklace",
-    "Meenakari Necklace",
-    "Temple Necklace",
-    "Party Necklace"
-  ],
-
-  "rani-haar": [
-    "Classic Rani Haar",
-    "Royal Rani Haar",
-    "Designer Rani Haar",
-    "Kundan Rani Haar",
-    "Bridal Rani Haar",
-    "Pearl Rani Haar",
-    "Polki Rani Haar",
-    "Meenakari Rani Haar",
-    "Temple Rani Haar",
-    "Party Rani Haar"
-  ],
-
-  "earrings": [
-    "Classic Jhumka",
-    "Royal Jhumka",
-    "Designer Jhumka",
-    "Kundan Jhumka",
-    "Bridal Jhumka",
-    "Pearl Jhumka",
-    "Polki Jhumka",
-    "Meenakari Jhumka",
-    "Temple Jhumka",
-    "Party Jhumka"
-  ],
-
-  "bangles": [
-    "Classic Chudi",
-    "Royal Chudi",
-    "Designer Chudi",
-    "Kundan Chudi",
-    "Bridal Chudi",
-    "Pearl Chudi",
-    "Polki Chudi",
-    "Meenakari Chudi",
-    "Temple Chudi",
-    "Party Chudi"
-  ],
-
-  "kangan": [
-    "Classic Kangan",
-    "Royal Kangan",
-    "Designer Kangan",
-    "Kundan Kangan",
-    "Bridal Kangan",
-    "Pearl Kangan",
-    "Polki Kangan",
-    "Meenakari Kangan",
-    "Temple Kangan",
-    "Party Kangan"
-  ],
-
-  "rings": [
-    "Classic Ring",
-    "Royal Ring",
-    "Designer Ring",
-    "Kundan Ring",
-    "Bridal Ring",
-    "Pearl Ring",
-    "Polki Ring",
-    "Meenakari Ring",
-    "Statement Ring",
-    "Party Ring"
-  ],
-
-  "maang-tikka": [
-    "Classic Maang Tikka",
-    "Royal Maang Tikka",
-    "Designer Maang Tikka",
-    "Kundan Maang Tikka",
-    "Bridal Maang Tikka",
-    "Pearl Maang Tikka",
-    "Polki Maang Tikka",
-    "Meenakari Maang Tikka",
-    "Temple Maang Tikka",
-    "Party Maang Tikka"
-  ],
-
-  "nath": [
-    "Classic Nath",
-    "Royal Nath",
-    "Designer Nath",
-    "Kundan Nath",
-    "Bridal Nath",
-    "Pearl Nath",
-    "Polki Nath",
-    "Meenakari Nath",
-    "Traditional Nath",
-    "Party Nath"
-  ],
-
-  "payal": [
-    "Classic Payal",
-    "Royal Payal",
-    "Designer Payal",
-    "Kundan Payal",
-    "Bridal Payal",
-    "Pearl Payal",
-    "Polki Payal",
-    "Meenakari Payal",
-    "Traditional Payal",
-    "Party Payal"
-  ],
-
-  "bajuband": [
-    "Classic Bajuband",
-    "Royal Bajuband",
-    "Designer Bajuband",
-    "Kundan Bajuband",
-    "Bridal Bajuband",
-    "Pearl Bajuband",
-    "Polki Bajuband",
-    "Meenakari Bajuband",
-    "Traditional Bajuband",
-    "Party Bajuband"
-  ],
-
-  "matha-patti": [
-    "Classic Matha Patti",
-    "Royal Matha Patti",
-    "Designer Matha Patti",
-    "Kundan Matha Patti",
-    "Bridal Matha Patti",
-    "Pearl Matha Patti",
-    "Polki Matha Patti",
-    "Meenakari Matha Patti",
-    "Temple Matha Patti",
-    "Party Matha Patti"
-  ],
-
-  "choker": [
-    "Classic Choker",
-    "Royal Choker",
-    "Designer Choker",
-    "Kundan Choker",
-    "Bridal Choker",
-    "Pearl Choker",
-    "Polki Choker",
-    "Meenakari Choker",
-    "Temple Choker",
-    "Party Choker"
-  ]
-};
-
-
-/* =========================
-   IMAGE KEYWORDS
-========================= */
-
-const imageKeywords = {
-
-  "necklace": "indian,jewellery,necklace",
-  "rani-haar": "indian,jewellery,bridal,necklace",
-  "earrings": "indian,jewellery,earrings",
-  "bangles": "indian,jewellery,bangles",
-  "kangan": "indian,jewellery,bangles",
-  "rings": "indian,jewellery,ring",
-  "maang-tikka": "indian,jewellery,maang,tikka",
-  "nath": "indian,jewellery,nose,ring",
-  "payal": "indian,jewellery,anklet,payal",
-  "bajuband": "indian,jewellery,bajuband",
-  "matha-patti": "indian,jewellery,matha,patti",
-  "choker": "indian,jewellery,choker"
-
-};
-
-
-/* =========================
-   PRODUCTS
-========================= */
+/* =========================================================
+   PRODUCT LIST
+   100 PRODUCTS PER CATEGORY
+   50 SILVER + 50 GOLD
+   ========================================================= */
 
 let products = [];
-let productId = 1;
-
 
 categories.forEach((category, categoryIndex) => {
 
-  const categoryName = category[0];
-  const categoryDesc = category[1];
-  const categoryEmoji = category[2];
-  const categoryKey = category[3];
-
-  const names = productNames[categoryKey];
-
   /* -------------------------
-     50 SILVER
-  ------------------------- */
+     50 SILVER DESIGNS
+     ------------------------- */
 
   for (let i = 1; i <= 50; i++) {
 
-    const baseName =
-      names[(i - 1) % names.length];
-
-    const imageLock =
-      10000 +
-      (categoryIndex * 100) +
-      i;
+    const designNumber = String(i).padStart(2, "0");
 
     products.push({
-
-      id: productId++,
-
-      cat: categoryName,
-
+      id: `S-${categoryIndex}-${i}`,
+      cat: category.name,
       catIndex: categoryIndex,
-
-      key: categoryKey,
-
-      metal: "Silver",
-
-      metalKey: "silver",
-
-      name:
-        baseName +
-        " Silver " +
-        String(i).padStart(2, "0"),
+      material: "Silver",
+      name: `${category.name} Silver Design ${designNumber}`,
 
       desc:
-        "Premium Silver " +
-        categoryName +
-        " — elegant design for शादी, पार्टी और daily wear.",
+        `Premium Silver ${category.name} design — शादी, पार्टी और special occasions के लिए।`,
 
       price:
-        silverPrices[
-          (i - 1) % silverPrices.length
-        ],
+        silverPrices[(i - 1 + categoryIndex) % silverPrices.length],
 
       img:
-        "https://loremflickr.com/900/900/" +
-        imageKeywords[categoryKey] +
-        "?lock=" +
-        imageLock
-
+        `https://loremflickr.com/900/1100/${encodeURIComponent(
+          category.keyword
+        )},jewelry?lock=${categoryIndex * 100 + i}`
     });
 
   }
 
 
   /* -------------------------
-     50 GOLD
-  ------------------------- */
+     50 GOLD DESIGNS
+     ------------------------- */
 
   for (let i = 1; i <= 50; i++) {
 
-    const baseName =
-      names[(i - 1) % names.length];
-
-    const imageLock =
-      20000 +
-      (categoryIndex * 100) +
-      i;
+    const designNumber = String(i).padStart(2, "0");
 
     products.push({
-
-      id: productId++,
-
-      cat: categoryName,
-
+      id: `G-${categoryIndex}-${i}`,
+      cat: category.name,
       catIndex: categoryIndex,
-
-      key: categoryKey,
-
-      metal: "Gold",
-
-      metalKey: "gold",
-
-      name:
-        baseName +
-        " Gold " +
-        String(i).padStart(2, "0"),
+      material: "Gold",
+      name: `${category.name} Gold Design ${designNumber}`,
 
       desc:
-        "Premium Gold " +
-        categoryName +
-        " — royal design for शादी, पार्टी और special occasions.",
+        `Premium Gold ${category.name} design — शादी, पार्टी और special occasions के लिए royal collection.`,
 
       price:
-        goldPrices[
-          (i - 1) % goldPrices.length
-        ],
+        goldPrices[(i - 1 + categoryIndex) % goldPrices.length],
 
       img:
-        "https://loremflickr.com/900/900/" +
-        imageKeywords[categoryKey] +
-        "?lock=" +
-        imageLock
-
+        `https://loremflickr.com/900/1100/${encodeURIComponent(
+          category.keyword
+        )},gold,jewelry?lock=${1000 + categoryIndex * 100 + i}`
     });
 
   }
@@ -346,22 +160,14 @@ categories.forEach((category, categoryIndex) => {
 });
 
 
-/* =========================
+/* =========================================================
    VARIABLES
-========================= */
+   ========================================================= */
 
 let activeCategory = null;
-let activeMetal = null;
 
 let cart =
-  JSON.parse(
-    localStorage.getItem("baisaCart") || "[]"
-  );
-
-
-/* =========================
-   ELEMENTS
-========================= */
+  JSON.parse(localStorage.getItem("baisaCart") || "[]");
 
 const categoryGrid =
   document.getElementById("categoryGrid");
@@ -373,30 +179,26 @@ const search =
   document.getElementById("search");
 
 
-/* =========================
+/* =========================================================
    CATEGORY CARDS
-========================= */
+   ========================================================= */
 
-categoryGrid.innerHTML =
-  categories.map((category, index) => {
+categoryGrid.innerHTML = categories
+  .map((category, index) => {
 
     return `
-
-      <div
-        class="category"
-        onclick="showCategory(${index})"
-      >
+      <div class="category" onclick="showCategory(${index})">
 
         <div class="emoji">
-          ${category[2]}
+          ${category.icon}
         </div>
 
         <h3>
-          ${category[0]}
+          ${category.name}
         </h3>
 
         <p>
-          ${category[1]}
+          ${category.desc}
         </p>
 
         <p>
@@ -408,116 +210,54 @@ categoryGrid.innerHTML =
         </small>
 
       </div>
-
     `;
 
-  }).join("");
+  })
+  .join("");
 
 
-/* =========================
-   PRODUCT FILTER
-========================= */
-
-function getFilteredProducts() {
-
-  let list = products;
-
-
-  /* CATEGORY */
-
-  if (activeCategory !== null) {
-
-    list =
-      list.filter(
-        p =>
-          p.catIndex ===
-          activeCategory
-      );
-
-  }
-
-
-  /* SILVER / GOLD */
-
-  if (activeMetal !== null) {
-
-    list =
-      list.filter(
-        p =>
-          p.metalKey ===
-          activeMetal
-      );
-
-  }
-
-
-  return list;
-
-}
-
-
-/* =========================
+/* =========================================================
    RENDER PRODUCTS
-========================= */
+   ========================================================= */
 
 function renderProducts(list = products) {
 
-  document.getElementById(
-    "productInfo"
-  ).textContent =
+  document.getElementById("productInfo").textContent =
     `${list.length} Designs`;
-
 
   if (!list.length) {
 
     productGrid.innerHTML = `
-
-      <div style="
-        grid-column:1/-1;
-        text-align:center;
-        padding:60px;
-      ">
-
-        <h2>
-          कोई Design नहीं मिली 😔
-        </h2>
-
+      <div class="no-products">
+        <h3>कोई Design नहीं मिला 😔</h3>
+        <p>कृपया दूसरा नाम search करें।</p>
       </div>
-
     `;
 
     return;
-
   }
 
 
-  productGrid.innerHTML =
-    list.map(product => {
-
-      const metalClass =
-        product.metalKey === "gold"
-          ? "Gold"
-          : "Silver";
-
+  productGrid.innerHTML = list
+    .map(product => {
 
       return `
-
         <article
           class="product"
-          onclick="openProduct(${product.id})"
+          onclick="openProduct('${product.id}')"
         >
 
           <img
             src="${product.img}"
             alt="${product.name}"
             loading="lazy"
+            onerror="this.src='https://placehold.co/900x1100?text=Jewellery'"
           >
 
           <div class="product-body">
 
             <div class="product-cat">
-              ${product.cat}
-              • ${metalClass}
+              ${product.cat} • ${product.material}
             </div>
 
             <h3>
@@ -532,10 +272,7 @@ function renderProducts(list = products) {
 
               <button
                 class="add"
-                onclick="
-                  event.stopPropagation();
-                  addToCart(${product.id});
-                "
+                onclick="event.stopPropagation(); addToCart('${product.id}')"
               >
                 Add
               </button>
@@ -545,215 +282,149 @@ function renderProducts(list = products) {
           </div>
 
         </article>
-
       `;
 
-    }).join("");
-
+    })
+    .join("");
 }
 
 
-/* =========================
+/* =========================================================
    SHOW CATEGORY
-========================= */
+   ========================================================= */
 
 function showCategory(index) {
 
   activeCategory = index;
 
-  activeMetal = null;
+  const category = categories[index];
 
-  const category =
-    categories[index];
+  document.getElementById("collectionTitle").textContent =
+    `${category.name} — ${category.desc}`;
 
+  const categoryProducts =
+    products.filter(
+      product => product.catIndex === index
+    );
 
-  document.getElementById(
-    "collectionTitle"
-  ).textContent =
-    `${category[0]} — 100 Designs`;
-
-
-  renderProducts(
-    getFilteredProducts()
-  );
-
+  renderProducts(categoryProducts);
 
   document
     .getElementById("collection")
     .scrollIntoView({
       behavior: "smooth"
     });
-
 }
 
 
-/* =========================
-   SILVER ONLY
-========================= */
-
-function showSilver() {
-
-  activeMetal = "silver";
-
-  renderProducts(
-    getFilteredProducts()
-  );
-
-}
-
-
-/* =========================
-   GOLD ONLY
-========================= */
-
-function showGold() {
-
-  activeMetal = "gold";
-
-  renderProducts(
-    getFilteredProducts()
-  );
-
-}
-
-
-/* =========================
+/* =========================================================
    SHOW ALL
-========================= */
+   ========================================================= */
 
 function showAll() {
 
   activeCategory = null;
-  activeMetal = null;
 
-  document.getElementById(
-    "collectionTitle"
-  ).textContent =
+  document.getElementById("collectionTitle").textContent =
     "खास Jewellery Collection";
 
-
   renderProducts(products);
-
 }
 
 
-/* =========================
+/* =========================================================
    SEARCH
-========================= */
+   ========================================================= */
 
-search.addEventListener(
-  "input",
-  function () {
+search.addEventListener("input", () => {
 
-    const q =
-      search.value
-        .trim()
-        .toLowerCase();
+  const q =
+    search.value
+      .trim()
+      .toLowerCase();
 
 
-    if (!q) {
+  if (!q) {
 
-      renderProducts(
-        getFilteredProducts()
-      );
-
-      return;
-
+    if (activeCategory === null) {
+      showAll();
+    } else {
+      showCategory(activeCategory);
     }
 
-
-    const source =
-      getFilteredProducts();
-
-
-    const result =
-      source.filter(
-        p =>
-          (
-            p.name +
-            " " +
-            p.cat +
-            " " +
-            p.metal +
-            " " +
-            p.desc
-          )
-          .toLowerCase()
-          .includes(q)
-      );
+    return;
+  }
 
 
-    document.getElementById(
-      "collectionTitle"
-    ).textContent =
-      "Search Results";
+  let list = products.filter(product => {
+
+    return (
+      product.name.toLowerCase().includes(q) ||
+      product.cat.toLowerCase().includes(q) ||
+      product.material.toLowerCase().includes(q) ||
+      product.desc.toLowerCase().includes(q)
+    );
+
+  });
 
 
-    renderProducts(result);
+  /* अगर category selected है,
+     तो search उसी category में होगा */
+
+  if (activeCategory !== null) {
+
+    list = list.filter(
+      product =>
+        product.catIndex === activeCategory
+    );
 
   }
-);
 
 
-/* =========================
+  document.getElementById("collectionTitle").textContent =
+    "Search Results";
+
+  renderProducts(list);
+
+});
+
+
+/* =========================================================
    OPEN PRODUCT
-========================= */
+   ========================================================= */
 
 function openProduct(id) {
 
   const product =
     products.find(
-      p =>
-        p.id === id
+      item => item.id === id
     );
-
 
   if (!product) return;
 
 
-  document.getElementById(
-    "modalImg"
-  ).src =
+  document.getElementById("modalImg").src =
     product.img;
 
-
-  document.getElementById(
-    "modalImg"
-  ).alt =
+  document.getElementById("modalImg").alt =
     product.name;
 
+  document.getElementById("modalCat").textContent =
+    `${product.cat} • ${product.material}`;
 
-  document.getElementById(
-    "modalCat"
-  ).textContent =
-    product.cat +
-    " • " +
-    product.metal;
-
-
-  document.getElementById(
-    "modalName"
-  ).textContent =
+  document.getElementById("modalName").textContent =
     product.name;
 
-
-  document.getElementById(
-    "modalDesc"
-  ).textContent =
+  document.getElementById("modalDesc").textContent =
     product.desc;
 
-
-  document.getElementById(
-    "modalPrice"
-  ).textContent =
+  document.getElementById("modalPrice").textContent =
     "₹" +
     product.price.toLocaleString("en-IN");
 
 
-  document.getElementById(
-    "modalAdd"
-  ).onclick =
-    function () {
+  document.getElementById("modalAdd").onclick =
+    () => {
 
       addToCart(product.id);
 
@@ -765,30 +436,26 @@ function openProduct(id) {
   document
     .getElementById("productModal")
     .classList.remove("hidden");
-
 }
 
 
-/* =========================
-   ADD CART
-========================= */
+/* =========================================================
+   ADD TO CART
+   ========================================================= */
 
 function addToCart(id) {
 
   const product =
     products.find(
-      p =>
-        p.id === id
+      item => item.id === id
     );
-
 
   if (!product) return;
 
 
   const found =
     cart.find(
-      item =>
-        item.id === id
+      item => item.id === id
     );
 
 
@@ -799,11 +466,8 @@ function addToCart(id) {
   } else {
 
     cart.push({
-
-      id: id,
-
+      id: product.id,
       qty: 1
-
     });
 
   }
@@ -811,12 +475,15 @@ function addToCart(id) {
 
   saveCart();
 
+  alert(
+    `${product.name} Cart में Add हो गया 🛒`
+  );
 }
 
 
-/* =========================
+/* =========================================================
    SAVE CART
-========================= */
+   ========================================================= */
 
 function saveCart() {
 
@@ -826,17 +493,6 @@ function saveCart() {
   );
 
 
-  updateCartCount();
-
-}
-
-
-/* =========================
-   CART COUNT
-========================= */
-
-function updateCartCount() {
-
   const count =
     cart.reduce(
       (total, item) =>
@@ -845,54 +501,44 @@ function updateCartCount() {
     );
 
 
-  document.getElementById(
-    "cartCount"
-  ).textContent =
-    count;
-
+  document.getElementById("cartCount")
+    .textContent = count;
 }
 
 
-/* =========================
+/* =========================================================
    OPEN CART
-========================= */
+   ========================================================= */
 
 function openCart() {
 
   const box =
-    document.getElementById(
-      "cartItems"
-    );
+    document.getElementById("cartItems");
 
 
   if (!cart.length) {
 
     box.innerHTML = `
-
       <p>
         Cart अभी खाली है।
         Jewellery select करके Add करें 💎
       </p>
-
     `;
 
   } else {
 
-    box.innerHTML =
-      cart.map(item => {
+    box.innerHTML = cart
+      .map(item => {
 
         const product =
           products.find(
-            p =>
-              p.id === item.id
+            p => p.id === item.id
           );
-
 
         if (!product) return "";
 
 
         return `
-
           <div class="cart-row">
 
             <img
@@ -907,7 +553,8 @@ function openCart() {
               </h4>
 
               <p>
-                ₹${product.price.toLocaleString("en-IN")}
+                ${product.material}
+                • ₹${product.price.toLocaleString("en-IN")}
                 × ${item.qty}
               </p>
 
@@ -915,19 +562,16 @@ function openCart() {
 
             <button
               class="remove"
-              onclick="
-                removeCart(${product.id})
-              "
+              onclick="removeCart('${product.id}')"
             >
               Remove
             </button>
 
           </div>
-
         `;
 
-      }).join("");
-
+      })
+      .join("");
   }
 
 
@@ -937,100 +581,109 @@ function openCart() {
 
         const product =
           products.find(
-            p =>
-              p.id === item.id
+            p => p.id === item.id
           );
 
-        if (!product) {
-          return sum;
-        }
-
-        return (
-          sum +
-          product.price *
-          item.qty
-        );
+        return sum +
+          (product
+            ? product.price * item.qty
+            : 0);
 
       },
       0
     );
 
 
-  document.getElementById(
-    "cartTotal"
-  ).textContent =
-    "₹" +
-    total.toLocaleString("en-IN");
+  document.getElementById("cartTotal")
+    .textContent =
+      "₹" +
+      total.toLocaleString("en-IN");
 
 
   document
     .getElementById("cartModal")
     .classList.remove("hidden");
-
 }
 
 
-/* =========================
+/* =========================================================
    REMOVE CART
-========================= */
+   ========================================================= */
 
 function removeCart(id) {
 
   cart =
     cart.filter(
-      item =>
-        item.id !== id
+      item => item.id !== id
     );
-
 
   saveCart();
 
   openCart();
-
 }
 
 
-/* =========================
+/* =========================================================
    CLOSE MODAL
-========================= */
+   ========================================================= */
 
 function closeModal(id) {
 
   document
     .getElementById(id)
     .classList.add("hidden");
-
 }
 
 
-/* =========================
+/* =========================================================
    CHECKOUT
-========================= */
+   ========================================================= */
 
 function checkout() {
 
   if (!cart.length) {
 
-    alert(
-      "Cart खाली है।"
-    );
+    alert("Cart खाली है।");
 
     return;
-
   }
 
 
   alert(
-    "आपका Cart तैयार है ❤️"
+    "Order / Payment system तैयार है। " +
+    "UPI ID या Payment Gateway जोड़कर " +
+    "real payment चालू किया जा सकता है।"
   );
-
 }
 
 
-/* =========================
-   START
-========================= */
+/* =========================================================
+   INITIAL LOAD
+   ========================================================= */
 
-updateCartCount();
+saveCart();
 
-showAll();
+renderProducts(products);
+
+
+/* =========================================================
+   CLOSE MODAL WHEN CLICKING OUTSIDE
+   ========================================================= */
+
+document.querySelectorAll(".modal")
+  .forEach(modal => {
+
+    modal.addEventListener(
+      "click",
+      event => {
+
+        if (event.target === modal) {
+
+          modal.classList.add("hidden");
+
+        }
+
+      }
+    );
+
+  });
