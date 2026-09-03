@@ -1,798 +1,722 @@
-// ===============================
-// BAISA KA SINGAR - PRODUCT DATA
-// ===============================
-
 const categories = [
-  {
-    name: "हार / Necklace",
-    desc: "Royal Necklace Designs",
-    icon: "📿",
-    keyword: "necklace"
-  },
-  {
-    name: "रानी हार",
-    desc: "Royal Rani Haar Collection",
-    icon: "👑",
-    keyword: "rani haar"
-  },
-  {
-    name: "झुमके",
-    desc: "Beautiful Earrings",
-    icon: "✨",
-    keyword: "earrings"
-  },
-  {
-    name: "अंगूठियाँ",
-    desc: "Beautiful Ring Collection",
-    icon: "💍",
-    keyword: "rings"
-  },
-  {
-    name: "मांग टीका",
-    desc: "Bridal Maang Tikka",
-    icon: "👸",
-    keyword: "maang tikka"
-  },
-  {
-    name: "नथ",
-    desc: "Traditional Nose Rings",
-    icon: "🌸",
-    keyword: "nath nose ring"
-  },
-  {
-    name: "पायल",
-    desc: "Traditional Payal",
-    icon: "✨",
-    keyword: "payal"
-  },
-  {
-    name: "बाजूबंद",
-    desc: "Royal Bajuband",
-    icon: "〰️",
-    keyword: "bajuband"
-  },
-  {
-    name: "माथा पट्टी",
-    desc: "Bridal Matha Patti",
-    icon: "👑",
-    keyword: "matha patti"
-  },
-  {
-    name: "Choker",
-    desc: "Premium Choker Designs",
-    icon: "💎",
-    keyword: "choker"
-  }
+
+{
+name:"हार",
+desc:"Royal Necklace Designs",
+icon:"💎",
+key:"necklace"
+},
+
+{
+name:"कड़े",
+desc:"Elegant Kade & Bangles",
+icon:"✨",
+key:"bangles"
+},
+
+{
+name:"अंगूठियाँ",
+desc:"Beautiful Ring Collection",
+icon:"💍",
+key:"rings"
+},
+
+{
+name:"मांग टीका",
+desc:"Bridal Maang Tikka",
+icon:"👑",
+key:"maang-tikka"
+},
+
+{
+name:"नाथ",
+desc:"Traditional Nose Rings",
+icon:"🌸",
+key:"nath"
+},
+
+{
+name:"पायल",
+desc:"Traditional Payal",
+icon:"✨",
+key:"payal"
+},
+
+{
+name:"बाजूबंद",
+desc:"Royal Bajuband",
+icon:"〰️",
+key:"bajuband"
+},
+
+{
+name:"माथा पट्टी",
+desc:"Bridal Matha Patti",
+icon:"👑",
+key:"matha"
+}
+
 ];
 
 
-// ==========================================
-// IMAGE SYSTEM
-// ==========================================
+const searchWords = {
 
-// अलग-अलग jewellery images के लिए अलग seeds
-// हर product का seed अलग होगा इसलिए image repeat नहीं होगी।
+necklace:"jewelry necklace",
 
-function jewelleryImage(category, metal, number) {
+bangles:"gold bangles jewelry",
 
-  const seed =
-    category
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-") +
-    "-" +
-    metal.toLowerCase() +
-    "-" +
-    number;
+rings:"jewelry ring",
 
-  return `https://loremflickr.com/900/900/jewelry,${encodeURIComponent(category)},${metal}?lock=${number + category.length * 100}`;
-}
+"maang-tikka":"bridal jewelry",
 
+nath:"indian jewelry",
 
-// ==========================================
-// PRICE SYSTEM
-// ==========================================
+payal:"silver anklet jewelry",
 
-function getPrice(metal, number) {
+bajuband:"indian jewelry",
 
-  if (metal === "Silver") {
+matha:"bridal jewelry"
 
-    const prices = [199, 299, 399];
+};
 
-    return prices[(number - 1) % prices.length];
-
-  }
-
-  const prices = [499, 599, 699];
-
-  return prices[(number - 1) % prices.length];
-}
-
-
-// ==========================================
-// PRODUCT NAME
-// ==========================================
-
-function getProductName(category, metal, number) {
-
-  const silverNames = [
-    "Classic",
-    "Royal",
-    "Designer",
-    "Kundan",
-    "Elegant",
-    "Bridal",
-    "Traditional",
-    "Premium",
-    "Beautiful",
-    "Rajwadi"
-  ];
-
-  const goldNames = [
-    "Royal Gold",
-    "Bridal Gold",
-    "Designer Gold",
-    "Kundan Gold",
-    "Premium Gold",
-    "Rajwadi Gold",
-    "Elegant Gold",
-    "Traditional Gold",
-    "Beautiful Gold",
-    "Luxury Gold"
-  ];
-
-  const names = metal === "Silver"
-    ? silverNames
-    : goldNames;
-
-  const style = names[(number - 1) % names.length];
-
-  return `${style} ${category} ${metal} Design ${String(number).padStart(2, "0")}`;
-}
-
-
-// ==========================================
-// CREATE 100 PRODUCTS PER CATEGORY
-// 50 SILVER + 50 GOLD
-// ==========================================
 
 let products = [];
 
-let productId = 1;
+let cart =
+JSON.parse(localStorage.getItem("baisaCart")) || [];
 
-categories.forEach((category) => {
-
-  // -------------------------
-  // SILVER 01 - 50
-  // -------------------------
-
-  for (let i = 1; i <= 50; i++) {
-
-    products.push({
-
-      id: productId++,
-
-      category: category.name,
-
-      metal: "Silver",
-
-      number: i,
-
-      name: getProductName(
-        category.name,
-        "Silver",
-        i
-      ),
-
-      price: getPrice("Silver", i),
-
-      image: jewelleryImage(
-        category.keyword,
-        "Silver",
-        i
-      ),
-
-      description:
-        `Premium ${category.name} Silver Design ${i}. ` +
-        `Beautiful artificial jewellery for wedding, party and special occasions.`
-
-    });
-
-  }
+let activeCategory = null;
 
 
-  // -------------------------
-  // GOLD 01 - 50
-  // -------------------------
+function createProducts(){
 
-  for (let i = 1; i <= 50; i++) {
+let id = 1;
 
-    products.push({
+categories.forEach(category => {
 
-      id: productId++,
 
-      category: category.name,
+/* 50 SILVER */
 
-      metal: "Gold",
+for(let i=1;i<=50;i++){
 
-      number: i,
+const prices =
+[199,299,399];
 
-      name: getProductName(
-        category.name,
-        "Gold",
-        i
-      ),
+products.push({
 
-      price: getPrice("Gold", i),
+id:id++,
 
-      image: jewelleryImage(
-        category.keyword,
-        "Gold",
-        i + 100
-      ),
+category:category.name,
 
-      description:
-        `Premium ${category.name} Gold Design ${i}. ` +
-        `Beautiful artificial jewellery for wedding, party and special occasions.`
+key:category.key,
 
-    });
+metal:"Silver",
 
-  }
+name:
+`${category.name} Silver Design ${String(i).padStart(2,"0")}`,
+
+price:
+prices[(i-1)%3],
+
+image:
+`https://loremflickr.com/700/700/${encodeURIComponent(searchWords[category.key])}?lock=${id}`,
+
+desc:
+`Premium Silver finish ${category.name} design.`
+
+});
+
+}
+
+
+/* 50 GOLD */
+
+for(let i=1;i<=50;i++){
+
+const prices =
+[499,599,699];
+
+products.push({
+
+id:id++,
+
+category:category.name,
+
+key:category.key,
+
+metal:"Gold",
+
+name:
+`${category.name} Gold Design ${String(i).padStart(2,"0")}`,
+
+price:
+prices[(i-1)%3],
+
+image:
+`https://loremflickr.com/700/700/${encodeURIComponent(searchWords[category.key])}?lock=${id}`,
+
+desc:
+`Premium Gold finish ${category.name} design.`
+
+});
+
+}
+
+});
+
+}
+
+
+const categoryGrid =
+document.getElementById("categoryGrid");
+
+
+categoryGrid.innerHTML =
+categories.map((category,index)=>`
+
+<div
+class="categoryCard"
+onclick="showCategory(${index})"
+>
+
+<div class="categoryIcon">
+${category.icon}
+</div>
+
+<h3>
+${category.name}
+</h3>
+
+<p>
+${category.desc}
+</p>
+
+<small>
+100 Designs
+<br>
+50 Silver + 50 Gold
+</small>
+
+</div>
+
+`).join("");
+
+
+const productGrid =
+document.getElementById("productGrid");
+
+
+function renderProducts(list){
+
+document.getElementById("productInfo")
+.textContent =
+`${list.length} Designs`;
+
+
+if(!list.length){
+
+productGrid.innerHTML =
+`<div class="empty">
+कोई Design नहीं मिला ❤️
+</div>`;
+
+return;
+
+}
+
+
+productGrid.innerHTML =
+list.map(product=>`
+
+<div class="productCard">
+
+<img
+src="${product.image}"
+alt="${product.name}"
+loading="lazy"
+onerror="this.src='https://placehold.co/700x700/f4e7df/65001f?text=Jewellery'"
+>
+
+<div class="productBody">
+
+<div class="productCat">
+${product.category} • ${product.metal}
+</div>
+
+<div class="productName">
+${product.name}
+</div>
+
+<div class="productBottom">
+
+<span class="price">
+₹${product.price.toLocaleString("en-IN")}
+</span>
+
+<button
+class="addBtn"
+onclick="addToCart(${product.id})"
+>
+Add
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+
+function showCategory(index){
+
+activeCategory = index;
+
+const category =
+categories[index];
+
+document.getElementById("collectionTitle")
+.textContent =
+`${category.name} — 100 Designs`;
+
+renderProducts(
+products.filter(
+product =>
+product.key === category.key
+)
+);
+
+document.getElementById("collection")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+function showAll(){
+
+activeCategory = null;
+
+document.getElementById("collectionTitle")
+.textContent =
+"खास Jewellery Collection — 800 Designs";
+
+renderProducts(products);
+
+document.getElementById("collection")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+document
+.getElementById("search")
+.addEventListener("input",function(){
+
+const value =
+this.value.toLowerCase().trim();
+
+
+if(!value){
+
+if(activeCategory === null)
+showAll();
+
+else
+showCategory(activeCategory);
+
+return;
+
+}
+
+
+const result =
+products.filter(product =>
+
+product.name
+.toLowerCase()
+.includes(value)
+
+||
+
+product.category
+.toLowerCase()
+.includes(value)
+
+||
+
+product.metal
+.toLowerCase()
+.includes(value)
+
+);
+
+
+document.getElementById("collectionTitle")
+.textContent =
+"Search Results";
+
+renderProducts(result);
 
 });
 
 
-// ==========================================
-// CART
-// ==========================================
+function addToCart(id){
 
-let cart = JSON.parse(
-  localStorage.getItem("baisaCart") || "[]"
+const item =
+cart.find(item => item.id === id);
+
+
+if(item)
+item.qty++;
+
+else
+cart.push({
+id:id,
+qty:1
+});
+
+
+saveCart();
+
+alert(
+"Jewellery Cart में Add हो गई ❤️"
 );
 
-
-// ==========================================
-// ELEMENTS
-// ==========================================
-
-const categoryGrid =
-  document.getElementById("categoryGrid");
-
-const productGrid =
-  document.getElementById("productGrid");
-
-const collectionTitle =
-  document.getElementById("collectionTitle");
-
-const productInfo =
-  document.getElementById("productInfo");
-
-const search =
-  document.getElementById("search");
-
-
-// ==========================================
-// CATEGORY CARDS
-// ==========================================
-
-categoryGrid.innerHTML = categories
-  .map((category, index) => {
-
-    return `
-      <button
-        class="category-card"
-        onclick="showCategory(${index})"
-      >
-
-        <div class="category-icon">
-          ${category.icon}
-        </div>
-
-        <h3>
-          ${category.name}
-        </h3>
-
-        <p>
-          ${category.desc}
-        </p>
-
-        <strong>
-          100 Designs
-        </strong>
-
-        <small>
-          50 Silver + 50 Gold
-        </small>
-
-      </button>
-    `;
-
-  })
-  .join("");
-
-
-// ==========================================
-// RENDER PRODUCTS
-// ==========================================
-
-function renderProducts(list) {
-
-  productInfo.textContent =
-    `${list.length} Designs`;
-
-  productGrid.innerHTML =
-    list.map(product => {
-
-      return `
-
-        <article
-          class="product-card"
-          onclick="openProduct(${product.id})"
-        >
-
-          <img
-            src="${product.image}"
-            alt="${product.name}"
-            loading="lazy"
-            onerror="this.src='https://placehold.co/900x900/F8EFEA/5B071C?text=Jewellery+Design'"
-          >
-
-          <div class="product-body">
-
-            <span class="product-category">
-              ${product.category} • ${product.metal}
-            </span>
-
-            <h3>
-              ${product.name}
-            </h3>
-
-            <div class="product-bottom">
-
-              <strong>
-                ₹${product.price.toLocaleString("en-IN")}
-              </strong>
-
-              <button
-                onclick="event.stopPropagation(); addToCart(${product.id})"
-              >
-                Add
-              </button>
-
-            </div>
-
-          </div>
-
-        </article>
-
-      `;
-
-    }).join("");
 }
 
 
-// ==========================================
-// SHOW CATEGORY
-// ==========================================
+function saveCart(){
 
-let activeCategory = 0;
-
-function showCategory(index) {
-
-  activeCategory = index;
-
-  const category =
-    categories[index];
-
-  collectionTitle.textContent =
-    `${category.name} — ${category.desc}`;
-
-  const list =
-    products.filter(
-      p => p.category === category.name
-    );
-
-  renderProducts(list);
-
-  document
-    .getElementById("collection")
-    .scrollIntoView({
-      behavior: "smooth"
-    });
-}
-
-
-// ==========================================
-// SHOW ALL
-// ==========================================
-
-function showAll() {
-
-  collectionTitle.textContent =
-    "सभी Jewellery Designs";
-
-  renderProducts(products);
-
-}
-
-
-// ==========================================
-// SEARCH
-// ==========================================
-
-search.addEventListener(
-  "input",
-  function () {
-
-    const text =
-      this.value
-        .trim()
-        .toLowerCase();
-
-    if (!text) {
-
-      showCategory(activeCategory);
-
-      return;
-
-    }
-
-    const result =
-      products.filter(product =>
-
-        product.name
-          .toLowerCase()
-          .includes(text)
-
-        ||
-
-        product.category
-          .toLowerCase()
-          .includes(text)
-
-        ||
-
-        product.metal
-          .toLowerCase()
-          .includes(text)
-
-      );
-
-    collectionTitle.textContent =
-      "Search Results";
-
-    renderProducts(result);
-
-  }
+localStorage.setItem(
+"baisaCart",
+JSON.stringify(cart)
 );
-
-
-// ==========================================
-// OPEN PRODUCT
-// ==========================================
-
-function openProduct(id) {
-
-  const product =
-    products.find(
-      p => p.id === id
-    );
-
-  if (!product) return;
-
-
-  document.getElementById("modalImg").src =
-    product.image;
-
-  document.getElementById("modalCat").textContent =
-    `${product.category} • ${product.metal}`;
-
-  document.getElementById("modalName").textContent =
-    product.name;
-
-  document.getElementById("modalDesc").textContent =
-    product.description;
-
-  document.getElementById("modalPrice").textContent =
-    `₹${product.price.toLocaleString("en-IN")}`;
-
-
-  document.getElementById("modalAdd").onclick =
-    function () {
-
-      addToCart(product.id);
-
-      closeModal("productModal");
-
-    };
-
-
-  document
-    .getElementById("productModal")
-    .classList.remove("hidden");
-
-}
-
-
-// ==========================================
-// CLOSE MODAL
-// ==========================================
-
-function closeModal(id) {
-
-  document
-    .getElementById(id)
-    .classList.add("hidden");
-
-}
-
-
-// ==========================================
-// ADD TO CART
-// ==========================================
-
-function addToCart(id) {
-
-  const product =
-    products.find(
-      p => p.id === id
-    );
-
-  if (!product) return;
-
-
-  const existing =
-    cart.find(
-      item => item.id === id
-    );
-
-
-  if (existing) {
-
-    existing.qty++;
-
-  } else {
-
-    cart.push({
-
-      id: product.id,
-
-      name: product.name,
-
-      price: product.price,
-
-      image: product.image,
-
-      qty: 1
-
-    });
-
-  }
-
-
-  saveCart();
-
-  alert(
-    `${product.name} Cart में Add हो गया ❤️`
-  );
-
-}
-
-
-// ==========================================
-// SAVE CART
-// ==========================================
-
-function saveCart() {
-
-  localStorage.setItem(
-    "baisaCart",
-    JSON.stringify(cart)
-  );
-
-  updateCartCount();
-
-}
-
-
-// ==========================================
-// CART COUNT
-// ==========================================
-
-function updateCartCount() {
-
-  const count =
-    cart.reduce(
-      (total, item) =>
-        total + item.qty,
-      0
-    );
-
-  document.getElementById(
-    "cartCount"
-  ).textContent = count;
-
-}
-
-
-// ==========================================
-// OPEN CART
-// ==========================================
-
-function openCart() {
-
-  const box =
-    document.getElementById("cartItems");
-
-
-  if (!cart.length) {
-
-    box.innerHTML = `
-      <div class="empty-cart">
-        🛍️ Cart अभी खाली है
-      </div>
-    `;
-
-    document.getElementById(
-      "cartTotal"
-    ).textContent = "₹0";
-
-  } else {
-
-    box.innerHTML =
-      cart.map(item => {
-
-        return `
-
-          <div class="cart-item">
-
-            <img
-              src="${item.image}"
-              alt=""
-            >
-
-            <div>
-
-              <strong>
-                ${item.name}
-              </strong>
-
-              <p>
-                ₹${item.price.toLocaleString("en-IN")}
-                × ${item.qty}
-              </p>
-
-            </div>
-
-            <button
-              onclick="removeFromCart(${item.id})"
-            >
-              ×
-            </button>
-
-          </div>
-
-        `;
-
-      }).join("");
-
-
-    const total =
-      cart.reduce(
-        (sum, item) =>
-          sum +
-          item.price *
-          item.qty,
-        0
-      );
-
-
-    document.getElementById(
-      "cartTotal"
-    ).textContent =
-      `₹${total.toLocaleString("en-IN")}`;
-
-  }
-
-
-  document
-    .getElementById("cartModal")
-    .classList.remove("hidden");
-
-}
-
-
-// ==========================================
-// REMOVE CART ITEM
-// ==========================================
-
-function removeFromCart(id) {
-
-  cart =
-    cart.filter(
-      item => item.id !== id
-    );
-
-  saveCart();
-
-  openCart();
-
-}
-
-
-// ==========================================
-// CHECKOUT
-// ==========================================
-
-function checkout() {
-
-  if (!cart.length) {
-
-    alert(
-      "पहले Jewellery Cart में Add करें ❤️"
-    );
-
-    return;
-
-  }
-
-
-  const total =
-    cart.reduce(
-      (sum, item) =>
-        sum +
-        item.price *
-        item.qty,
-      0
-    );
-
-
-  alert(
-    `Order Total: ₹${total.toLocaleString("en-IN")}\n\nCOD / Payment आगे जोड़ा जा सकता है।`
-  );
-
-}
-
-
-// ==========================================
-// INITIAL LOAD
-// ==========================================
 
 updateCartCount();
 
-showCategory(0);
-function checkout() {
-  if (cart.length === 0) {
-    alert("पहले कोई Jewellery Add करें ❤️");
-    return;
-  }
-
-  const total = cart.reduce((sum, item) => {
-    return sum + (item.price * item.qty);
-  }, 0);
-
-  document.getElementById("paymentAmount").textContent =
-    "₹" + total.toLocaleString("en-IN");
-
-  closeModal("cartModal");
-
-  document.getElementById("payment").scrollIntoView({
-    behavior: "smooth"
-  });
 }
 
-function paymentDone() {
-  const total = cart.reduce((sum, item) => {
-    return sum + (item.price * item.qty);
-  }, 0);
 
-  const message =
-    "Hello Baisa Ka Singar,%0A%0A" +
-    "I have completed my online payment.%0A" +
-    "Order Amount: ₹" +
-    total.toLocaleString("en-IN");
+function updateCartCount(){
 
-  window.open(
-    "https://wa.me/917568496499?text=" + message,
-    "_blank"
-  );
+const count =
+cart.reduce(
+(total,item) =>
+total + item.qty,
+0
+);
+
+document.getElementById("cartCount")
+.textContent = count;
+
 }
+
+
+function openCart(){
+
+renderCart();
+
+document.getElementById("cartModal")
+.classList.remove("hidden");
+
+}
+
+
+function renderCart(){
+
+const box =
+document.getElementById("cartItems");
+
+
+if(!cart.length){
+
+box.innerHTML =
+`<div class="empty">
+आपका Cart खाली है ❤️
+</div>`;
+
+document.getElementById("cartTotal")
+.textContent = "₹0";
+
+return;
+
+}
+
+
+let total = 0;
+
+
+box.innerHTML =
+cart.map(item=>{
+
+const product =
+products.find(
+product =>
+product.id === item.id
+);
+
+
+const subtotal =
+product.price * item.qty;
+
+total += subtotal;
+
+
+return `
+
+<div class="cartItem">
+
+<img
+src="${product.image}"
+alt=""
+>
+
+<div class="cartInfo">
+
+<b>
+${product.name}
+</b>
+
+<div>
+₹${product.price.toLocaleString("en-IN")}
+</div>
+
+<button
+class="remove"
+onclick="removeFromCart(${product.id})"
+>
+Remove
+</button>
+
+</div>
+
+
+<div class="qty">
+
+<button
+onclick="changeQty(${product.id},-1)"
+>
+−
+</button>
+
+<b>
+${item.qty}
+</b>
+
+<button
+onclick="changeQty(${product.id},1)"
+>
++
+</button>
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+
+document.getElementById("cartTotal")
+.textContent =
+"₹" + total.toLocaleString("en-IN");
+
+}
+
+
+function changeQty(id,change){
+
+const item =
+cart.find(
+item => item.id === id
+);
+
+
+if(!item)
+return;
+
+
+item.qty += change;
+
+
+if(item.qty <= 0){
+
+cart =
+cart.filter(
+item => item.id !== id
+);
+
+}
+
+
+saveCart();
+
+renderCart();
+
+}
+
+
+function removeFromCart(id){
+
+cart =
+cart.filter(
+item => item.id !== id
+);
+
+saveCart();
+
+renderCart();
+
+}
+
+
+function checkout(){
+
+if(!cart.length){
+
+alert(
+"पहले Jewellery Add करें ❤️"
+);
+
+return;
+
+}
+
+
+const total =
+cart.reduce((sum,item)=>{
+
+const product =
+products.find(
+product =>
+product.id === item.id
+);
+
+return sum +
+product.price * item.qty;
+
+},0);
+
+
+document.getElementById("paymentAmount")
+.textContent =
+"₹" + total.toLocaleString("en-IN");
+
+
+closeModal("cartModal");
+
+
+document.getElementById("payment")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+function paymentDone(){
+
+if(!cart.length){
+
+alert(
+"पहले Cart में Jewellery Add करें ❤️"
+);
+
+return;
+
+}
+
+
+const total =
+cart.reduce((sum,item)=>{
+
+const product =
+products.find(
+product =>
+product.id === item.id
+);
+
+return sum +
+product.price * item.qty;
+
+},0);
+
+
+let order = "";
+
+cart.forEach(item=>{
+
+const product =
+products.find(
+product =>
+product.id === item.id
+);
+
+order +=
+`${product.name} x ${item.qty} = ₹${product.price * item.qty}\n`;
+
+});
+
+
+const message =
+`Hello Baisa Ka Singar,
+
+मैंने Online Payment किया है.
+
+Order:
+${order}
+
+Total:
+₹${total.toLocaleString("en-IN")}
+
+Payment Screenshot भेज रहा/रही हूँ.`;
+
+
+window.open(
+
+"https://wa.me/917568496499?text=" +
+encodeURIComponent(message),
+
+"_blank"
+
+);
+
+}
+
+
+function closeModal(id){
+
+document
+.getElementById(id)
+.classList.add("hidden");
+
+}
+
+
+/* PRODUCT MODAL */
+
+document.addEventListener(
+"click",
+function(event){
+
+if(
+event.target.classList.contains("productCard")
+)
+return;
+
+});
+
+
+createProducts();
+
+renderProducts(products);
+
+updateCartCount();
