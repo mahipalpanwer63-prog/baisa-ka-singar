@@ -1,299 +1,270 @@
 /* =========================================================
    BAISA KA SINGAR
-   PREMIUM ARTIFICIAL JEWELLERY
-   12 CATEGORIES × 50 DESIGNS = 600 PRODUCTS
+   12 CATEGORIES × 50 PRODUCTS
    ========================================================= */
 
 
-/* =========================================================
+/* =========================
    CATEGORIES
-   ========================================================= */
+========================= */
 
 const categories = [
 
   {
     name: "हार / Necklace",
     desc: "Royal Necklace Designs",
-    icon: "💎",
-    keyword: "necklace"
+    emoji: "💎",
+    key: "necklace"
   },
 
   {
     name: "Rani Haar",
     desc: "Royal Bridal Collection",
-    icon: "👑",
-    keyword: "rani haar"
+    emoji: "👑",
+    key: "rani-haar"
   },
 
   {
     name: "झुमके",
     desc: "Beautiful Earrings",
-    icon: "✨",
-    keyword: "jhumka earrings"
+    emoji: "💎",
+    key: "earrings"
   },
 
   {
     name: "चूड़ियाँ",
     desc: "Designer Bangles",
-    icon: "⭕",
-    keyword: "bangles"
+    emoji: "⭕",
+    key: "bangles"
   },
 
   {
     name: "कंगन",
     desc: "Elegant Kada & Bangles",
-    icon: "✨",
-    keyword: "kangan kada"
+    emoji: "✨",
+    key: "kangan"
   },
 
   {
     name: "अंगूठियाँ",
-    desc: "Beautiful Ring Collection",
-    icon: "💍",
-    keyword: "rings"
+    desc: "Beautiful Rings",
+    emoji: "💍",
+    key: "rings"
   },
 
   {
     name: "मांग टीका",
     desc: "Bridal Maang Tikka",
-    icon: "👸",
-    keyword: "maang tikka"
+    emoji: "👸",
+    key: "maang-tikka"
   },
 
   {
     name: "नथ",
     desc: "Traditional Nose Rings",
-    icon: "🌸",
-    keyword: "nath nose ring"
+    emoji: "🌸",
+    key: "nath"
   },
 
   {
     name: "पायल",
     desc: "Traditional Payal",
-    icon: "✨",
-    keyword: "payal anklet"
+    emoji: "✨",
+    key: "payal"
   },
 
   {
     name: "बाजूबंद",
     desc: "Royal Bajuband",
-    icon: "〰️",
-    keyword: "bajuband armlet"
+    emoji: "〰️",
+    key: "bajuband"
   },
 
   {
     name: "माथा पट्टी",
     desc: "Bridal Matha Patti",
-    icon: "👑",
-    keyword: "matha patti"
+    emoji: "👑",
+    key: "matha-patti"
   },
 
   {
     name: "Choker",
     desc: "Premium Choker Designs",
-    icon: "💎",
-    keyword: "choker necklace"
+    emoji: "💎",
+    key: "choker"
   }
 
 ];
 
 
-/* =========================================================
-   50 DIFFERENT IMAGE LOCKS FOR EACH CATEGORY
-   ========================================================= */
+/* =========================
+   PRODUCT DATA
+========================= */
 
-const imageLocks = Array.from(
-  { length: 50 },
-  (_, i) => i + 1
-);
+const productTypes = {
 
-
-/* =========================================================
-   CATEGORY-SPECIFIC IMAGE SEARCH
-   IMPORTANT:
-   Each category gets its OWN jewellery keyword.
-   ========================================================= */
-
-function getProductImage(category, number) {
-
-  const keyword = encodeURIComponent(
-    category.keyword + " jewellery"
-  );
-
-  const lock = imageLocks[number - 1];
-
-  return `https://loremflickr.com/900/900/${keyword}?lock=${category.keyword.length * 100 + lock}`;
-}
-
-
-/* =========================================================
-   PRODUCT NAME BANKS
-   ========================================================= */
-
-const nameStyles = {
-
-  "हार / Necklace": [
+  "necklace": [
     "Royal Necklace",
     "Kundan Necklace",
     "Bridal Necklace",
-    "Rajwadi Necklace",
+    "Diamond Necklace",
+    "Pearl Necklace",
     "Polki Necklace",
     "Meenakari Necklace",
+    "Temple Necklace",
     "Designer Necklace",
-    "Pearl Necklace",
-    "Antique Necklace",
-    "Diamond Look Necklace"
+    "Wedding Necklace"
   ],
 
-  "Rani Haar": [
+  "rani-haar": [
     "Royal Rani Haar",
     "Bridal Rani Haar",
     "Kundan Rani Haar",
-    "Rajwadi Rani Haar",
     "Pearl Rani Haar",
     "Polki Rani Haar",
+    "Temple Rani Haar",
     "Meenakari Rani Haar",
-    "Antique Rani Haar",
-    "Premium Rani Haar",
-    "Designer Rani Haar"
+    "Diamond Rani Haar",
+    "Designer Rani Haar",
+    "Wedding Rani Haar"
   ],
 
-  "झुमके": [
+  "earrings": [
     "Royal Jhumka",
     "Kundan Jhumka",
     "Bridal Jhumka",
-    "Rajwadi Jhumka",
     "Pearl Jhumka",
+    "Diamond Jhumka",
     "Meenakari Jhumka",
-    "Antique Jhumka",
-    "Designer Jhumka",
     "Temple Jhumka",
-    "Premium Jhumka"
+    "Long Jhumka",
+    "Designer Jhumka",
+    "Wedding Jhumka"
   ],
 
-  "चूड़ियाँ": [
+  "bangles": [
     "Royal Bangles",
     "Kundan Bangles",
     "Bridal Bangles",
-    "Rajwadi Bangles",
-    "Meenakari Bangles",
-    "Stone Bangles",
-    "Designer Bangles",
+    "Diamond Bangles",
     "Pearl Bangles",
-    "Antique Bangles",
-    "Premium Bangles"
+    "Meenakari Bangles",
+    "Temple Bangles",
+    "Designer Bangles",
+    "Wedding Bangles",
+    "Traditional Bangles"
   ],
 
-  "कंगन": [
+  "kangan": [
     "Royal Kangan",
     "Kundan Kangan",
     "Bridal Kangan",
-    "Rajwadi Kangan",
-    "Meenakari Kangan",
-    "Polki Kangan",
-    "Designer Kangan",
+    "Diamond Kangan",
     "Pearl Kangan",
-    "Antique Kangan",
-    "Premium Kangan"
+    "Meenakari Kangan",
+    "Temple Kangan",
+    "Designer Kangan",
+    "Wedding Kangan",
+    "Traditional Kangan"
   ],
 
-  "अंगूठियाँ": [
+  "rings": [
     "Royal Ring",
     "Kundan Ring",
     "Bridal Ring",
-    "Diamond Look Ring",
-    "Rajwadi Ring",
+    "Diamond Ring",
+    "Pearl Ring",
     "Polki Ring",
     "Meenakari Ring",
-    "Stone Ring",
     "Designer Ring",
-    "Premium Ring"
+    "Wedding Ring",
+    "Statement Ring"
   ],
 
-  "मांग टीका": [
+  "maang-tikka": [
     "Royal Maang Tikka",
     "Kundan Maang Tikka",
     "Bridal Maang Tikka",
-    "Rajwadi Maang Tikka",
+    "Diamond Maang Tikka",
+    "Pearl Maang Tikka",
     "Polki Maang Tikka",
     "Meenakari Maang Tikka",
-    "Pearl Maang Tikka",
     "Designer Maang Tikka",
-    "Antique Maang Tikka",
-    "Premium Maang Tikka"
+    "Wedding Maang Tikka",
+    "Traditional Maang Tikka"
   ],
 
-  "नथ": [
+  "nath": [
     "Royal Nath",
     "Kundan Nath",
     "Bridal Nath",
-    "Rajwadi Nath",
+    "Diamond Nath",
     "Pearl Nath",
     "Polki Nath",
     "Meenakari Nath",
-    "Traditional Nath",
     "Designer Nath",
-    "Premium Nath"
+    "Wedding Nath",
+    "Traditional Nath"
   ],
 
-  "पायल": [
+  "payal": [
     "Royal Payal",
-    "Bridal Payal",
-    "Silver Look Payal",
-    "Pearl Payal",
     "Kundan Payal",
-    "Rajwadi Payal",
-    "Traditional Payal",
+    "Bridal Payal",
+    "Diamond Payal",
+    "Pearl Payal",
+    "Meenakari Payal",
     "Designer Payal",
-    "Antique Payal",
-    "Premium Payal"
+    "Wedding Payal",
+    "Traditional Payal",
+    "Fancy Payal"
   ],
 
-  "बाजूबंद": [
+  "bajuband": [
     "Royal Bajuband",
-    "Bridal Bajuband",
     "Kundan Bajuband",
-    "Rajwadi Bajuband",
-    "Meenakari Bajuband",
-    "Polki Bajuband",
+    "Bridal Bajuband",
+    "Diamond Bajuband",
     "Pearl Bajuband",
-    "Antique Bajuband",
+    "Polki Bajuband",
+    "Meenakari Bajuband",
     "Designer Bajuband",
-    "Premium Bajuband"
+    "Wedding Bajuband",
+    "Traditional Bajuband"
   ],
 
-  "माथा पट्टी": [
+  "matha-patti": [
     "Royal Matha Patti",
-    "Bridal Matha Patti",
     "Kundan Matha Patti",
-    "Rajwadi Matha Patti",
+    "Bridal Matha Patti",
+    "Diamond Matha Patti",
+    "Pearl Matha Patti",
     "Polki Matha Patti",
     "Meenakari Matha Patti",
-    "Pearl Matha Patti",
-    "Antique Matha Patti",
     "Designer Matha Patti",
-    "Premium Matha Patti"
+    "Wedding Matha Patti",
+    "Traditional Matha Patti"
   ],
 
-  "Choker": [
+  "choker": [
     "Royal Choker",
     "Kundan Choker",
     "Bridal Choker",
-    "Rajwadi Choker",
+    "Diamond Choker",
+    "Pearl Choker",
     "Polki Choker",
     "Meenakari Choker",
-    "Pearl Choker",
-    "Diamond Look Choker",
+    "Temple Choker",
     "Designer Choker",
-    "Premium Choker"
+    "Wedding Choker"
   ]
 
 };
 
 
-/* =========================================================
-   PRICE SYSTEM
-   ========================================================= */
+/* =========================
+   PRICE
+========================= */
 
 const priceBase = [
   499,
@@ -303,97 +274,152 @@ const priceBase = [
   1299,
   1499,
   1699,
-  1899,
-  2099,
+  1999,
   2299,
-  2499,
-  2699,
-  2899,
-  3099,
-  3299
+  2499
 ];
 
 
-/* =========================================================
-   CREATE 600 PRODUCTS
-   ========================================================= */
+/* =========================
+   IMAGE KEYWORDS
+========================= */
+
+const imageKeywords = {
+
+  "necklace":
+    "indian,jewellery,necklace",
+
+  "rani-haar":
+    "indian,jewellery,bridal,necklace",
+
+  "earrings":
+    "indian,jewellery,earrings",
+
+  "bangles":
+    "indian,jewellery,bangles",
+
+  "kangan":
+    "indian,jewellery,bangles",
+
+  "rings":
+    "indian,jewellery,ring",
+
+  "maang-tikka":
+    "indian,jewellery,maang,tikka",
+
+  "nath":
+    "indian,jewellery,nose,ring",
+
+  "payal":
+    "indian,jewellery,anklet,payal",
+
+  "bajuband":
+    "indian,jewellery,bajuband",
+
+  "matha-patti":
+    "indian,jewellery,matha,patti",
+
+  "choker":
+    "indian,jewellery,choker"
+
+};
+
+
+/* =========================
+   CREATE 50 UNIQUE PRODUCTS
+   ========================= */
 
 let products = [];
 
+let productId = 1;
 
 categories.forEach((category, categoryIndex) => {
 
+  const names = productTypes[category.key];
+
   for (let i = 1; i <= 50; i++) {
 
-    const id =
-      categoryIndex * 50 + i;
+    const typeName =
+      names[(i - 1) % names.length];
 
-    const styles =
-      nameStyles[category.name];
+    const variation =
+      Math.floor((i - 1) / names.length) + 1;
 
-    const styleName =
-      styles[(i - 1) % styles.length];
+    const price =
+      priceBase[
+        (i + categoryIndex) %
+        priceBase.length
+      ] +
+      (categoryIndex * 50) +
+      (variation * 25);
+
+
+    /*
+      IMPORTANT:
+
+      हर product का अलग lock है।
+      इसलिए same category में भी
+      image URL अलग रहेगा।
+    */
+
+    const imageQuery =
+      imageKeywords[category.key];
+
+    const imageUrl =
+      "https://loremflickr.com/900/900/" +
+      imageQuery +
+      "?lock=" +
+      (1000 + productId);
+
 
     products.push({
 
-      id: id,
+      id: productId,
 
       cat: category.name,
 
       catIndex: categoryIndex,
 
+      key: category.key,
+
       name:
-        `${styleName} Design ${String(i).padStart(2, "0")}`,
+        typeName +
+        " Design " +
+        String(i).padStart(2, "0"),
 
       desc:
-        `Premium ${category.name} jewellery design — शादी, पार्टी और special occasions के लिए elegant collection.`,
+        "Premium " +
+        category.name +
+        " design — शादी, पार्टी और special occasions के लिए elegant collection.",
 
-      price:
-        priceBase[
-          (i + categoryIndex) % priceBase.length
-        ] +
-        (categoryIndex * 50),
+      price: price,
 
-      img:
-        getProductImage(category, i)
+      img: imageUrl
 
     });
+
+    productId++;
 
   }
 
 });
 
 
-/* =========================================================
-   STATE
-   ========================================================= */
+/* =========================
+   VARIABLES
+========================= */
 
 let activeCategory = null;
 
-
-let cart = [];
-
-try {
-
-  cart =
-    JSON.parse(
-      localStorage.getItem("baisaCart") || "[]"
-    );
-
-  if (!Array.isArray(cart)) {
-    cart = [];
-  }
-
-} catch (error) {
-
-  cart = [];
-
-}
+let cart =
+  JSON.parse(
+    localStorage.getItem("baisaCart") || "[]"
+  );
 
 
-/* =========================================================
+/* =========================
    ELEMENTS
-   ========================================================= */
+========================= */
 
 const categoryGrid =
   document.getElementById("categoryGrid");
@@ -405,9 +431,9 @@ const search =
   document.getElementById("search");
 
 
-/* =========================================================
+/* =========================
    CATEGORY CARDS
-   ========================================================= */
+========================= */
 
 categoryGrid.innerHTML =
   categories.map((category, index) => {
@@ -420,7 +446,7 @@ categoryGrid.innerHTML =
       >
 
         <div class="emoji">
-          ${category.icon}
+          ${category.emoji}
         </div>
 
         <h3>
@@ -442,16 +468,15 @@ categoryGrid.innerHTML =
   }).join("");
 
 
-/* =========================================================
+/* =========================
    RENDER PRODUCTS
-   ========================================================= */
+========================= */
 
 function renderProducts(list = products) {
 
-  const productInfo =
-    document.getElementById("productInfo");
-
-  productInfo.textContent =
+  document.getElementById(
+    "productInfo"
+  ).textContent =
     `${list.length} Designs`;
 
 
@@ -462,15 +487,15 @@ function renderProducts(list = products) {
       <div style="
         grid-column:1/-1;
         text-align:center;
-        padding:60px 20px;
+        padding:60px;
       ">
 
         <h2>
-          Jewellery नहीं मिली 💎
+          कोई Design नहीं मिली 😔
         </h2>
 
         <p>
-          दूसरी jewellery search करके देखें।
+          दूसरी Jewellery search करें।
         </p>
 
       </div>
@@ -495,7 +520,6 @@ function renderProducts(list = products) {
             src="${product.img}"
             alt="${product.name}"
             loading="lazy"
-            onerror="this.src='https://placehold.co/900x900/f8eee8/5b071d?text=Jewellery'"
           >
 
           <div class="product-body">
@@ -516,7 +540,10 @@ function renderProducts(list = products) {
 
               <button
                 class="add"
-                onclick="event.stopPropagation(); addToCart(${product.id})"
+                onclick="
+                  event.stopPropagation();
+                  addToCart(${product.id});
+                "
               >
                 Add
               </button>
@@ -534,9 +561,9 @@ function renderProducts(list = products) {
 }
 
 
-/* =========================================================
+/* =========================
    SHOW CATEGORY
-   ========================================================= */
+========================= */
 
 function showCategory(index) {
 
@@ -554,17 +581,19 @@ function showCategory(index) {
 
   /*
     IMPORTANT:
-    केवल उसी category के 50 products
+
+    सिर्फ उसी category के
+    products filter होंगे।
   */
 
-  const categoryProducts =
+  const filteredProducts =
     products.filter(
       product =>
         product.catIndex === index
     );
 
 
-  renderProducts(categoryProducts);
+  renderProducts(filteredProducts);
 
 
   document
@@ -576,14 +605,13 @@ function showCategory(index) {
 }
 
 
-/* =========================================================
+/* =========================
    SHOW ALL
-   ========================================================= */
+========================= */
 
 function showAll() {
 
   activeCategory = null;
-
 
   document.getElementById(
     "collectionTitle"
@@ -596,30 +624,26 @@ function showAll() {
 }
 
 
-/* =========================================================
+/* =========================
    SEARCH
-   ========================================================= */
+========================= */
 
 search.addEventListener(
   "input",
   function () {
 
-    const query =
+    const q =
       search.value
         .trim()
         .toLowerCase();
 
 
-    if (!query) {
+    if (!q) {
 
       if (activeCategory === null) {
-
         showAll();
-
       } else {
-
         showCategory(activeCategory);
-
       }
 
       return;
@@ -627,37 +651,39 @@ search.addEventListener(
     }
 
 
-    let searchableProducts =
-      products;
-
-
     /*
-      अगर category खुली है,
-      तो search उसी category में होगा।
+      Search करते समय भी
+      category mix नहीं होगी।
     */
+
+    let sourceProducts = products;
+
 
     if (activeCategory !== null) {
 
-      searchableProducts =
+      sourceProducts =
         products.filter(
-          product =>
-            product.catIndex === activeCategory
+          p =>
+            p.catIndex ===
+            activeCategory
         );
 
     }
 
 
     const result =
-      searchableProducts.filter(product => {
-
-        const text =
-          `${product.name}
-           ${product.cat}
-           ${product.desc}`.toLowerCase();
-
-        return text.includes(query);
-
-      });
+      sourceProducts.filter(
+        p =>
+          (
+            p.name +
+            " " +
+            p.cat +
+            " " +
+            p.desc
+          )
+          .toLowerCase()
+          .includes(q)
+      );
 
 
     document.getElementById(
@@ -672,15 +698,15 @@ search.addEventListener(
 );
 
 
-/* =========================================================
+/* =========================
    OPEN PRODUCT
-   ========================================================= */
+========================= */
 
 function openProduct(id) {
 
   const product =
     products.find(
-      item => item.id === id
+      p => p.id === id
     );
 
 
@@ -726,13 +752,14 @@ function openProduct(id) {
 
   document.getElementById(
     "modalAdd"
-  ).onclick = function () {
+  ).onclick =
+    function () {
 
-    addToCart(product.id);
+      addToCart(product.id);
 
-    closeModal("productModal");
+      closeModal("productModal");
 
-  };
+    };
 
 
   document
@@ -742,36 +769,40 @@ function openProduct(id) {
 }
 
 
-/* =========================================================
-   ADD TO CART
-   ========================================================= */
+/* =========================
+   CART
+========================= */
 
 function addToCart(id) {
 
   const product =
     products.find(
-      item => item.id === id
+      p => p.id === id
     );
 
 
   if (!product) return;
 
 
-  const existing =
+  const found =
     cart.find(
-      item => item.id === id
+      item =>
+        item.id === id
     );
 
 
-  if (existing) {
+  if (found) {
 
-    existing.qty++;
+    found.qty++;
 
   } else {
 
     cart.push({
-      id: id,
+
+      id: product.id,
+
       qty: 1
+
     });
 
   }
@@ -779,17 +810,12 @@ function addToCart(id) {
 
   saveCart();
 
-
-  alert(
-    `${product.name} Cart में add हो गया 💎`
-  );
-
 }
 
 
-/* =========================================================
+/* =========================
    SAVE CART
-   ========================================================= */
+========================= */
 
 function saveCart() {
 
@@ -804,9 +830,9 @@ function saveCart() {
 }
 
 
-/* =========================================================
+/* =========================
    CART COUNT
-   ========================================================= */
+========================= */
 
 function updateCartCount() {
 
@@ -826,14 +852,16 @@ function updateCartCount() {
 }
 
 
-/* =========================================================
+/* =========================
    OPEN CART
-   ========================================================= */
+========================= */
 
 function openCart() {
 
   const box =
-    document.getElementById("cartItems");
+    document.getElementById(
+      "cartItems"
+    );
 
 
   if (!cart.length) {
@@ -854,7 +882,8 @@ function openCart() {
 
         const product =
           products.find(
-            p => p.id === item.id
+            p =>
+              p.id === item.id
           );
 
 
@@ -905,16 +934,15 @@ function openCart() {
 
         const product =
           products.find(
-            p => p.id === item.id
+            p =>
+              p.id === item.id
           );
 
-        if (!product) return sum;
-
-        return (
-          sum +
-          product.price *
-          item.qty
-        );
+        return sum +
+          (product
+            ? product.price *
+              item.qty
+            : 0);
 
       },
       0
@@ -935,15 +963,16 @@ function openCart() {
 }
 
 
-/* =========================================================
+/* =========================
    REMOVE CART
-   ========================================================= */
+========================= */
 
 function removeCart(id) {
 
   cart =
     cart.filter(
-      item => item.id !== id
+      item =>
+        item.id !== id
     );
 
 
@@ -954,9 +983,9 @@ function removeCart(id) {
 }
 
 
-/* =========================================================
+/* =========================
    CLOSE MODAL
-   ========================================================= */
+========================= */
 
 function closeModal(id) {
 
@@ -967,9 +996,9 @@ function closeModal(id) {
 }
 
 
-/* =========================================================
+/* =========================
    CHECKOUT
-   ========================================================= */
+========================= */
 
 function checkout() {
 
@@ -985,44 +1014,16 @@ function checkout() {
 
 
   alert(
-    "Order/Payment integration के लिए UPI ID या payment gateway जोड़ना होगा। अभी आपका cart तैयार है।"
+    "Order / Payment system अगला step है। आपका Cart तैयार है ❤️"
   );
 
 }
 
 
-/* =========================================================
-   CLOSE MODALS WHEN CLICKING OUTSIDE
-   ========================================================= */
-
-document
-  .querySelectorAll(".modal")
-  .forEach(modal => {
-
-    modal.addEventListener(
-      "click",
-      function (event) {
-
-        if (
-          event.target === modal
-        ) {
-
-          modal.classList.add(
-            "hidden"
-          );
-
-        }
-
-      }
-    );
-
-  });
-
-
-/* =========================================================
-   INITIAL LOAD
-   ========================================================= */
+/* =========================
+   START WEBSITE
+========================= */
 
 updateCartCount();
 
-renderProducts(products);
+showAll();
