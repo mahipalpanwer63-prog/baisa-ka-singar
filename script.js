@@ -1,929 +1,457 @@
 /* =========================================================
-   BAISA KA SINGAR
-   PREMIUM JEWELLERY STORE
-   ========================================================= */
-
-
-/* =========================================================
-   CATEGORIES
+   BAISA KA SINGAR - JEWELLERY SHOP
+   12 Categories × 100 Designs
+   50 Silver + 50 Gold in every category
    ========================================================= */
 
 const categories = [
-
-  {
-    name: "हार / Necklace",
-    desc: "Royal Necklace Designs",
-    icon: "💎",
-    type: "necklace"
-  },
-
-  {
-    name: "Rani Haar",
-    desc: "Royal Bridal Collection",
-    icon: "👑",
-    type: "ranihaar"
-  },
-
-  {
-    name: "झुमके",
-    desc: "Beautiful Earrings",
-    icon: "💎",
-    type: "earrings"
-  },
-
-  {
-    name: "चूड़ियाँ",
-    desc: "Designer Bangles",
-    icon: "⭕",
-    type: "bangles"
-  },
-
-  {
-    name: "कंगन",
-    desc: "Elegant Kada & Bangles",
-    icon: "✨",
-    type: "kada"
-  },
-
-  {
-    name: "अंगूठियाँ",
-    desc: "Beautiful Rings",
-    icon: "💍",
-    type: "rings"
-  },
-
-  {
-    name: "मांग टीका",
-    desc: "Bridal Maang Tikka",
-    icon: "👸",
-    type: "maangtikka"
-  },
-
-  {
-    name: "नथ",
-    desc: "Traditional Nose Rings",
-    icon: "🌸",
-    type: "nath"
-  },
-
-  {
-    name: "पायल",
-    desc: "Traditional Payal",
-    icon: "✨",
-    type: "payal"
-  },
-
-  {
-    name: "बाजूबंद",
-    desc: "Royal Bajuband",
-    icon: "〰️",
-    type: "bajuband"
-  },
-
-  {
-    name: "माथा पट्टी",
-    desc: "Bridal Matha Patti",
-    icon: "👑",
-    type: "mathapatti"
-  },
-
-  {
-    name: "Choker",
-    desc: "Premium Choker Designs",
-    icon: "💎",
-    type: "choker"
-  }
-
+  ["हार / Necklace", "Royal Necklace Designs", "💎"],
+  ["Rani Haar", "Royal Bridal Collection", "👑"],
+  ["झुमके", "Beautiful Earrings", "💎"],
+  ["चूड़ियाँ", "Designer Bangles", "⭕"],
+  ["कंगन", "Elegant Kada & Bangles", "✨"],
+  ["अंगूठियाँ", "Beautiful Rings", "💍"],
+  ["मांग टीका", "Bridal Maang Tikka", "👸"],
+  ["नथ", "Traditional Nose Rings", "🌸"],
+  ["पायल", "Traditional Payal", "✨"],
+  ["बाजूबंद", "Royal Bajuband", "〰️"],
+  ["माथा पट्टी", "Bridal Matha Patti", "👑"],
+  ["Choker", "Premium Choker Designs", "💎"]
 ];
-
 
 /* =========================================================
-   PRICES
+   PRICE
+   Silver: ₹199 / ₹299 / ₹399
+   Gold:   ₹499 / ₹599 / ₹699
    ========================================================= */
 
-const silverPrices = [
-  199,
-  299,
-  399
-];
-
-const goldPrices = [
-  499,
-  599,
-  699
-];
-
+const silverPrices = [199, 299, 399];
+const goldPrices = [499, 599, 699];
 
 /* =========================================================
-   SVG JEWELLERY IMAGE GENERATOR
+   JEWELLERY IMAGE GENERATOR
+   हर product की अलग SVG image बनेगी।
+   इसलिए एक ही photo बार-बार नहीं आएगी।
    ========================================================= */
 
-function jewelleryImage(type, material, design) {
+function makeJewelleryImage(category, metal, number) {
 
-  const isGold = material === "Gold";
+  const gold = metal === "Gold";
 
-  const metal = isGold
-    ? "#D4AF37"
-    : "#C9CED6";
-
-  const darkMetal = isGold
-    ? "#8F6B16"
-    : "#737B87";
-
+  const main = gold ? "#D4AF37" : "#C8CCD2";
+  const light = gold ? "#FFE9A6" : "#F7F9FC";
+  const dark = gold ? "#8B6508" : "#6D737C";
   const stoneColors = [
-    "#7DD3FC",
-    "#A78BFA",
-    "#F9A8D4",
-    "#67E8F9",
-    "#86EFAC",
-    "#FDE68A",
-    "#FCA5A5"
+    "#E91E63",
+    "#7C4DFF",
+    "#00BCD4",
+    "#2196F3",
+    "#4CAF50",
+    "#FF5722",
+    "#F44336",
+    "#673AB7"
   ];
 
-  const stone =
-    stoneColors[
-      (design + type.length) %
-      stoneColors.length
-    ];
+  const stone = stoneColors[(number - 1) % stoneColors.length];
 
-  const variation =
-    (design % 7) * 6;
+  const bgColors = [
+    "#FFF8F2",
+    "#F8F1EA",
+    "#F3F0EC",
+    "#FFFDF8",
+    "#F7F4EF",
+    "#F2ECE6"
+  ];
 
-  let art = "";
+  const bg = bgColors[(number - 1) % bgColors.length];
 
+  const variation = number % 10;
+  let jewellery = "";
 
-  /* =======================================================
-     NECKLACE
-     ======================================================= */
+  /* ================= NECKLACE ================= */
 
-  if (type === "necklace") {
+  if (category === "हार / Necklace") {
 
-    art = `
-      <path
-        d="M170 180 Q450 ${300 + variation} 730 180"
-        fill="none"
-        stroke="${metal}"
-        stroke-width="24"
-      />
+    const beads = Array.from({length: 9}, (_, i) =>
+      `<circle cx="${180 + i * 40}" cy="${145 + Math.abs(4-i)*10}"
+      r="${7 + variation % 4}" fill="${main}" stroke="${dark}" stroke-width="2"/>`
+    ).join("");
 
-      <path
-        d="M200 210 Q450 ${370 + variation} 700 210"
-        fill="none"
-        stroke="${darkMetal}"
-        stroke-width="10"
-      />
+    jewellery = `
+      <path d="M120 100 Q300 330 480 100"
+      fill="none" stroke="${dark}" stroke-width="10"/>
 
-      ${[0,1,2,3,4,5,6].map(i => `
-        <circle
-          cx="${240 + i * 70}"
-          cy="${235 + Math.abs(3-i)*20 + variation}"
-          r="${15 + (design+i)%8}"
-          fill="${stone}"
-          stroke="${metal}"
-          stroke-width="8"
-        />
-      `).join("")}
+      <path d="M120 100 Q300 300 480 100"
+      fill="none" stroke="${main}" stroke-width="16"/>
 
-      <path
-        d="M390 ${310 + variation}
-           L450 ${390 + variation}
-           L510 ${310 + variation}
-           L450 ${285 + variation}
-           Z"
-        fill="${stone}"
-        stroke="${metal}"
-        stroke-width="12"
-      />
+      ${beads}
+
+      <path d="M250 245 Q300 ${300 + variation*3} 350 245
+      Q300 210 250 245Z"
+      fill="${main}" stroke="${dark}" stroke-width="4"/>
+
+      <circle cx="300" cy="${255 + variation}" r="24"
+      fill="${stone}" stroke="${light}" stroke-width="7"/>
     `;
-
   }
 
+  /* ================= RANI HAAR ================= */
 
-  /* =======================================================
-     RANI HAAR
-     ======================================================= */
+  else if (category === "Rani Haar") {
 
-  else if (type === "ranihaar") {
+    jewellery = `
+      <path d="M100 85 Q300 260 500 85"
+      fill="none" stroke="${main}" stroke-width="14"/>
 
-    art = `
-      <path
-        d="M140 150 Q450 300 760 150"
-        fill="none"
-        stroke="${metal}"
-        stroke-width="18"
-      />
+      <path d="M125 130 Q300 320 475 130"
+      fill="none" stroke="${dark}" stroke-width="8"/>
 
-      <path
-        d="M130 210 Q450 390 770 210"
-        fill="none"
-        stroke="${metal}"
-        stroke-width="16"
-      />
+      <path d="M155 175 Q300 365 445 175"
+      fill="none" stroke="${main}" stroke-width="12"/>
 
-      <path
-        d="M120 270 Q450 470 780 270"
-        fill="none"
-        stroke="${darkMetal}"
-        stroke-width="12"
-      />
+      <circle cx="300" cy="275" r="${45 + variation}"
+      fill="${stone}" stroke="${main}" stroke-width="14"/>
 
-      ${[0,1,2,3,4,5,6,7].map(i => `
-        <circle
-          cx="${160+i*82}"
-          cy="${220 + Math.sin(i)*25}"
-          r="${16+(design+i)%7}"
-          fill="${stone}"
-          stroke="${metal}"
-          stroke-width="7"
-        />
-      `).join("")}
-
-      <path
-        d="M370 360 L450 470 L530 360 L450 325 Z"
-        fill="${stone}"
-        stroke="${metal}"
-        stroke-width="13"
-      />
+      <path d="M270 315 Q300 360 330 315"
+      fill="${main}" stroke="${dark}" stroke-width="5"/>
     `;
-
   }
 
+  /* ================= EARRINGS ================= */
 
-  /* =======================================================
-     EARRINGS
-     ======================================================= */
+  else if (category === "झुमके") {
 
-  else if (type === "earrings") {
+    jewellery = `
+      <g transform="translate(160 70)">
+        <circle cx="0" cy="0" r="18"
+        fill="${main}" stroke="${dark}" stroke-width="4"/>
+        <path d="M-45 40 Q0 100 45 40 Q0 15 -45 40Z"
+        fill="${main}" stroke="${dark}" stroke-width="5"/>
+        <circle cx="0" cy="75" r="${20 + variation}"
+        fill="${stone}" stroke="${light}" stroke-width="7"/>
+        <path d="M-35 95 Q0 145 35 95"
+        fill="${main}" stroke="${dark}" stroke-width="5"/>
+      </g>
 
-    art = `
-      <circle
-        cx="300"
-        cy="220"
-        r="45"
-        fill="${stone}"
-        stroke="${metal}"
-        stroke-width="14"
-      />
-
-      <circle
-        cx="600"
-        cy="220"
-        r="45"
-        fill="${stone}"
-        stroke="${metal}"
-        stroke-width="14"
-      />
-
-      <path
-        d="M260 260 Q300 350 360 420 Q300 500 240 420"
-        fill="none"
-        stroke="${metal}"
-        stroke-width="22"
-      />
-
-      <path
-        d="M640 260 Q600 350 540 420 Q600 500 660 420"
-        fill="none"
-        stroke="${metal}"
-        stroke-width="22"
-      />
-
-      <circle
-        cx="300"
-        cy="430"
-        r="${55 + variation}"
-        fill="${stone}"
-        stroke="${metal}"
-        stroke-width="12"
-      />
-
-      <circle
-        cx="600"
-        cy="430"
-        r="${55 + variation}"
-        fill="${stone}"
-        stroke="${metal}"
-        stroke-width="12"
-      />
+      <g transform="translate(440 70)">
+        <circle cx="0" cy="0" r="18"
+        fill="${main}" stroke="${dark}" stroke-width="4"/>
+        <path d="M-45 40 Q0 100 45 40 Q0 15 -45 40Z"
+        fill="${main}" stroke="${dark}" stroke-width="5"/>
+        <circle cx="0" cy="75" r="${20 + variation}"
+        fill="${stone}" stroke="${light}" stroke-width="7"/>
+        <path d="M-35 95 Q0 145 35 95"
+        fill="${main}" stroke="${dark}" stroke-width="5"/>
+      </g>
     `;
-
   }
 
+  /* ================= BANGLES ================= */
 
-  /* =======================================================
-     BANGLES
-     ======================================================= */
+  else if (category === "चूड़ियाँ") {
 
-  else if (type === "bangles") {
+    jewellery = Array.from({length: 6}, (_, i) => `
+      <circle cx="300" cy="220" r="${75 + i*22}"
+      fill="none"
+      stroke="${i % 2 === 0 ? main : dark}"
+      stroke-width="${10 + (variation % 5)}"/>
+    `).join("");
 
-    art = `
-      <ellipse
-        cx="450"
-        cy="330"
-        rx="${220 + variation}"
-        ry="${100 + variation/2}"
-        fill="none"
-        stroke="${metal}"
-        stroke-width="32"
-      />
-
-      <ellipse
-        cx="450"
-        cy="330"
-        rx="${180 + variation}"
-        ry="${75 + variation/3}"
-        fill="none"
-        stroke="${darkMetal}"
-        stroke-width="12"
-      />
-
-      ${[0,1,2,3,4].map(i => `
-        <circle
-          cx="${270+i*90}"
-          cy="${330 + Math.sin(i)*45}"
-          r="${18+(design+i)%8}"
-          fill="${stone}"
-          stroke="${metal}"
-          stroke-width="7"
-        />
-      `).join("")}
+    jewellery += `
+      <circle cx="300" cy="220" r="38"
+      fill="${stone}" stroke="${light}" stroke-width="8"/>
     `;
-
   }
 
+  /* ================= KADA ================= */
 
-  /* =======================================================
-     KADA
-     ======================================================= */
+  else if (category === "कंगन") {
 
-  else if (type === "kada") {
+    jewellery = `
+      <ellipse cx="300" cy="220" rx="185" ry="105"
+      fill="none" stroke="${dark}" stroke-width="28"/>
 
-    art = `
-      <ellipse
-        cx="450"
-        cy="330"
-        rx="235"
-        ry="115"
-        fill="none"
-        stroke="${metal}"
-        stroke-width="${48 + variation}"
-      />
+      <ellipse cx="300" cy="220" rx="185" ry="105"
+      fill="none" stroke="${main}" stroke-width="18"/>
 
-      <ellipse
-        cx="450"
-        cy="330"
-        rx="180"
-        ry="72"
-        fill="none"
-        stroke="${darkMetal}"
-        stroke-width="12"
-      />
+      <circle cx="300" cy="115" r="${35 + variation}"
+      fill="${stone}" stroke="${main}" stroke-width="12"/>
 
-      <path
-        d="M290 290 Q450 190 610 290"
-        fill="none"
-        stroke="${stone}"
-        stroke-width="20"
-      />
-
-      <circle
-        cx="450"
-        cy="215"
-        r="38"
-        fill="${stone}"
-        stroke="${metal}"
-        stroke-width="10"
-      />
+      <path d="M240 120 L210 70 M360 120 L390 70"
+      stroke="${main}" stroke-width="12"/>
     `;
-
   }
 
+  /* ================= RING ================= */
 
-  /* =======================================================
-     RINGS
-     ======================================================= */
+  else if (category === "अंगूठियाँ") {
 
-  else if (type === "rings") {
+    jewellery = `
+      <ellipse cx="300" cy="270" rx="115" ry="75"
+      fill="none" stroke="${dark}" stroke-width="28"/>
 
-    art = `
-      <ellipse
-        cx="450"
-        cy="350"
-        rx="180"
-        ry="210"
-        fill="none"
-        stroke="${metal}"
-        stroke-width="${38 + variation}"
-      />
+      <ellipse cx="300" cy="270" rx="115" ry="75"
+      fill="none" stroke="${main}" stroke-width="17"/>
 
-      <path
-        d="M330 250
-           Q450 130 570 250
-           Q450 350 330 250"
+      <polygon points="
+        300,80
+        ${350 + variation},150
+        325,225
+        275,225
+        ${250 - variation},150"
         fill="${stone}"
-        stroke="${metal}"
-        stroke-width="15"
-      />
+        stroke="${main}"
+        stroke-width="13"/>
 
-      <circle
-        cx="450"
-        cy="205"
-        r="${55 + design%20}"
-        fill="${stone}"
-        stroke="${metal}"
-        stroke-width="12"
-      />
+      <circle cx="300" cy="145" r="12"
+      fill="${light}"/>
     `;
-
   }
 
+  /* ================= MAANG TIKKA ================= */
 
-  /* =======================================================
-     MAANG TIKKA
-     ======================================================= */
+  else if (category === "मांग टीका") {
 
-  else if (type === "maangtikka") {
+    jewellery = `
+      <path d="M300 50 L300 250"
+      stroke="${main}" stroke-width="13"/>
 
-    art = `
-      <path
-        d="M450 100 L450 320"
-        stroke="${metal}"
-        stroke-width="18"
-      />
+      <circle cx="300" cy="75" r="25"
+      fill="${stone}" stroke="${main}" stroke-width="9"/>
 
-      <circle
-        cx="450"
-        cy="160"
-        r="38"
-        fill="${stone}"
-        stroke="${metal}"
-        stroke-width="10"
-      />
+      <path d="M235 235 Q300 150 365 235"
+      fill="none" stroke="${main}" stroke-width="13"/>
 
-      <path
-        d="M340 300 Q450 220 560 300"
-        fill="none"
-        stroke="${metal}"
-        stroke-width="20"
-      />
+      <circle cx="300" cy="${280 + variation}"
+      r="${35 + variation}"
+      fill="${stone}" stroke="${light}" stroke-width="9"/>
 
-      <circle
-        cx="450"
-        cy="370"
-        r="${70 + variation}"
-        fill="${stone}"
-        stroke="${metal}"
-        stroke-width="15"
-      />
-
-      ${[0,1,2,3].map(i => `
-        <circle
-          cx="${365+i*57}"
-          cy="${300 + Math.abs(1.5-i)*20}"
-          r="14"
-          fill="${stone}"
-        />
-      `).join("")}
+      <path d="M265 300 Q300 345 335 300"
+      fill="${main}" stroke="${dark}" stroke-width="6"/>
     `;
-
   }
 
+  /* ================= NATH ================= */
 
-  /* =======================================================
-     NATH
-     ======================================================= */
+  else if (category === "नथ") {
 
-  else if (type === "nath") {
+    jewellery = `
+      <circle cx="300" cy="220" r="${120 + variation*3}"
+      fill="none" stroke="${dark}" stroke-width="12"/>
 
-    art = `
-      <circle
-        cx="450"
-        cy="350"
-        r="${180 + variation}"
-        fill="none"
-        stroke="${metal}"
-        stroke-width="24"
-      />
+      <circle cx="300" cy="220" r="${110 + variation*3}"
+      fill="none" stroke="${main}" stroke-width="9"/>
 
-      <circle
-        cx="450"
-        cy="350"
-        r="115"
-        fill="none"
-        stroke="${darkMetal}"
-        stroke-width="9"
-      />
-
-      ${[0,1,2,3,4,5].map(i => {
-
-        const angle =
-          (i * 60 - 30) *
-          Math.PI / 180;
-
-        const x =
-          450 +
-          Math.cos(angle) * 180;
-
-        const y =
-          350 +
-          Math.sin(angle) * 180;
-
-        return `
-          <circle
-            cx="${x}"
-            cy="${y}"
-            r="${18+(design+i)%8}"
-            fill="${stone}"
-            stroke="${metal}"
-            stroke-width="7"
-          />
-        `;
-
+      ${Array.from({length: 8}, (_, i) => {
+        const a = (Math.PI * 2 / 8) * i;
+        const x = 300 + Math.cos(a) * 115;
+        const y = 220 + Math.sin(a) * 115;
+        return `<circle cx="${x}" cy="${y}" r="10"
+        fill="${stone}" stroke="${light}" stroke-width="4"/>`;
       }).join("")}
 
-      <path
-        d="M610 480 Q680 540 720 470"
-        fill="none"
-        stroke="${metal}"
-        stroke-width="16"
-      />
+      <path d="M410 220 Q470 210 475 160"
+      fill="none" stroke="${main}" stroke-width="8"/>
     `;
-
   }
 
+  /* ================= PAYAL ================= */
 
-  /* =======================================================
-     PAYAL
-     ======================================================= */
+  else if (category === "पायल") {
 
-  else if (type === "payal") {
+    jewellery = `
+      <path d="M100 220 Q300 110 500 220 Q300 330 100 220Z"
+      fill="none" stroke="${dark}" stroke-width="12"/>
 
-    art = `
-      <path
-        d="M120 390 Q450 ${180 + variation} 780 390"
-        fill="none"
-        stroke="${metal}"
-        stroke-width="28"
-      />
+      <path d="M105 220 Q300 135 495 220"
+      fill="none" stroke="${main}" stroke-width="13"/>
 
-      <path
-        d="M140 430 Q450 ${230 + variation} 760 430"
-        fill="none"
-        stroke="${darkMetal}"
-        stroke-width="12"
-      />
-
-      ${[0,1,2,3,4,5,6,7,8].map(i => `
-        <circle
-          cx="${160+i*72}"
-          cy="${385 + Math.sin(i)*35}"
-          r="${15+(design+i)%7}"
-          fill="${stone}"
-          stroke="${metal}"
-          stroke-width="6"
-        />
-      `).join("")}
-
-      ${[0,1,2,3,4,5].map(i => `
-        <path
-          d="M${260+i*75} 405
-             L${260+i*75} 500"
-          stroke="${metal}"
-          stroke-width="9"
-        />
-
-        <circle
-          cx="${260+i*75}"
-          cy="515"
-          r="13"
-          fill="${stone}"
-        />
+      ${Array.from({length: 12}, (_, i) => `
+        <circle cx="${120 + i*33}" cy="${205 + Math.sin(i)*20}"
+        r="${8 + variation%3}"
+        fill="${stone}" stroke="${main}" stroke-width="4"/>
       `).join("")}
     `;
-
   }
 
+  /* ================= BAJUBAND ================= */
 
-  /* =======================================================
-     BAJUBAND
-     ======================================================= */
+  else if (category === "बाजूबंद") {
 
-  else if (type === "bajuband") {
+    jewellery = `
+      <path d="M145 105 Q300 215 455 105"
+      fill="none" stroke="${dark}" stroke-width="25"/>
 
-    art = `
-      <path
-        d="M170 230 Q450 450 730 230"
-        fill="none"
-        stroke="${metal}"
-        stroke-width="35"
-      />
+      <path d="M145 105 Q300 215 455 105"
+      fill="none" stroke="${main}" stroke-width="16"/>
 
-      <path
-        d="M200 270 Q450 450 700 270"
-        fill="none"
-        stroke="${darkMetal}"
-        stroke-width="12"
-      />
-
-      <path
-        d="M360 330 L450 220 L540 330 L450 410 Z"
+      <polygon points="
+        300,165
+        ${350 + variation},215
+        325,285
+        275,285
+        ${250 - variation},215"
         fill="${stone}"
-        stroke="${metal}"
-        stroke-width="15"
-      />
+        stroke="${main}"
+        stroke-width="12"/>
 
-      ${[0,1,2,3].map(i => `
-        <circle
-          cx="${300+i*100}"
-          cy="${310 + Math.abs(1.5-i)*30}"
-          r="18"
-          fill="${stone}"
-        />
-      `).join("")}
+      <circle cx="300" cy="225" r="15"
+      fill="${light}"/>
     `;
-
   }
 
+  /* ================= MATHA PATTI ================= */
 
-  /* =======================================================
-     MATHA PATTI
-     ======================================================= */
+  else if (category === "माथा पट्टी") {
 
-  else if (type === "mathapatti") {
+    jewellery = `
+      <path d="M80 100 Q300 250 520 100"
+      fill="none" stroke="${main}" stroke-width="13"/>
 
-    art = `
-      <path
-        d="M130 230 Q450 420 770 230"
-        fill="none"
-        stroke="${metal}"
-        stroke-width="24"
-      />
+      <path d="M120 125 Q300 285 480 125"
+      fill="none" stroke="${dark}" stroke-width="9"/>
 
-      <path
-        d="M150 180 Q450 330 750 180"
-        fill="none"
-        stroke="${darkMetal}"
-        stroke-width="12"
-      />
+      <circle cx="300" cy="250"
+      r="${35 + variation}"
+      fill="${stone}" stroke="${main}" stroke-width="11"/>
 
-      <path
-        d="M450 130 L450 360"
-        stroke="${metal}"
-        stroke-width="18"
-      />
+      <path d="M300 60 L300 215"
+      stroke="${main}" stroke-width="10"/>
 
-      <circle
-        cx="450"
-        cy="390"
-        r="${65 + variation}"
+      ${[180,230,370,420].map(x => `
+        <circle cx="${x}" cy="${155 + Math.abs(x-300)/3}"
+        r="15" fill="${stone}" stroke="${light}" stroke-width="5"/>
+      `).join("")}
+    `;
+  }
+
+  /* ================= CHOKER ================= */
+
+  else if (category === "Choker") {
+
+    jewellery = `
+      <path d="M125 125 Q300 265 475 125"
+      fill="none" stroke="${dark}" stroke-width="35"/>
+
+      <path d="M125 125 Q300 265 475 125"
+      fill="none" stroke="${main}" stroke-width="22"/>
+
+      ${Array.from({length: 7}, (_, i) => `
+        <circle cx="${175 + i*42}"
+        cy="${155 + Math.abs(3-i)*13}"
+        r="${12 + variation%4}"
         fill="${stone}"
-        stroke="${metal}"
-        stroke-width="14"
-      />
-
-      ${[0,1,2,3,4,5].map(i => `
-        <circle
-          cx="${190+i*104}"
-          cy="${230 + Math.sin(i)*30}"
-          r="16"
-          fill="${stone}"
-          stroke="${metal}"
-          stroke-width="6"
-        />
-      `).join("")}
-    `;
-
-  }
-
-
-  /* =======================================================
-     CHOKER
-     ======================================================= */
-
-  else if (type === "choker") {
-
-    art = `
-      <path
-        d="M150 220 Q450 390 750 220"
-        fill="none"
-        stroke="${metal}"
-        stroke-width="45"
-      />
-
-      <path
-        d="M170 245 Q450 410 730 245"
-        fill="none"
-        stroke="${darkMetal}"
-        stroke-width="12"
-      />
-
-      ${[0,1,2,3,4,5,6].map(i => `
-        <circle
-          cx="${200+i*83}"
-          cy="${260 + Math.abs(3-i)*22}"
-          r="${20+(design+i)%8}"
-          fill="${stone}"
-          stroke="${metal}"
-          stroke-width="8"
-        />
+        stroke="${light}"
+        stroke-width="5"/>
       `).join("")}
 
-      <path
-        d="M390 340 L450 430 L510 340 L450 315 Z"
+      <polygon points="
+        300,220
+        ${350 + variation},270
+        325,335
+        275,335
+        ${250 - variation},270"
         fill="${stone}"
-        stroke="${metal}"
-        stroke-width="13"
-      />
+        stroke="${main}"
+        stroke-width="12"/>
     `;
-
   }
-
-
-  /* =======================================================
-     SVG
-     ======================================================= */
 
   const svg = `
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="900"
-      height="1100"
-      viewBox="0 0 900 700"
-    >
+  <svg xmlns="http://www.w3.org/2000/svg"
+       width="600"
+       height="600"
+       viewBox="0 0 600 600">
 
-      <defs>
+    <defs>
+      <radialGradient id="bg">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="100%" stop-color="${bg}"/>
+      </radialGradient>
 
-        <linearGradient
-          id="bg"
-          x1="0"
-          y1="0"
-          x2="1"
-          y2="1"
-        >
-          <stop
-            offset="0%"
-            stop-color="#fffaf5"
-          />
+      <filter id="shadow">
+        <feDropShadow dx="0" dy="8"
+        stdDeviation="8"
+        flood-opacity=".25"/>
+      </filter>
+    </defs>
 
-          <stop
-            offset="100%"
-            stop-color="#f4e8df"
-          />
-        </linearGradient>
+    <rect width="600" height="600"
+    rx="35" fill="url(#bg)"/>
 
-        <radialGradient
-          id="shine"
-        >
-          <stop
-            offset="0%"
-            stop-color="#ffffff"
-            stop-opacity=".9"
-          />
+    <g filter="url(#shadow)">
+      ${jewellery}
+    </g>
 
-          <stop
-            offset="100%"
-            stop-color="#ffffff"
-            stop-opacity="0"
-          />
-        </radialGradient>
+    <text x="300" y="525"
+      text-anchor="middle"
+      font-family="Arial"
+      font-size="22"
+      font-weight="bold"
+      fill="#4b1020">
+      ${category}
+    </text>
 
-      </defs>
+    <text x="300" y="555"
+      text-anchor="middle"
+      font-family="Arial"
+      font-size="18"
+      fill="${dark}">
+      ${metal} • Design ${String(number).padStart(2,"0")}
+    </text>
 
-
-      <rect
-        width="900"
-        height="700"
-        rx="30"
-        fill="url(#bg)"
-      />
-
-      <circle
-        cx="150"
-        cy="100"
-        r="120"
-        fill="url(#shine)"
-      />
-
-      <circle
-        cx="760"
-        cy="580"
-        r="150"
-        fill="url(#shine)"
-      />
-
-
-      ${art}
-
-
-      <text
-        x="450"
-        y="620"
-        text-anchor="middle"
-        font-family="Arial"
-        font-size="28"
-        font-weight="bold"
-        fill="${isGold ? "#80610f" : "#555c66"}"
-      >
-        ${material.toUpperCase()} • DESIGN ${String(design).padStart(2,"0")}
-      </text>
-
-    </svg>
+  </svg>
   `;
-
 
   return "data:image/svg+xml;charset=UTF-8," +
     encodeURIComponent(svg);
-
 }
 
 
 /* =========================================================
-   PRODUCTS
+   CREATE ALL PRODUCTS
    ========================================================= */
 
 let products = [];
 
+categories.forEach((category, catIndex) => {
 
-categories.forEach((category, categoryIndex) => {
-
-
-  /* -------------------------------------------------------
-     SILVER — 50 DESIGNS
-     ------------------------------------------------------- */
+  /* ---------- 50 SILVER ---------- */
 
   for (let i = 1; i <= 50; i++) {
 
+    const id = catIndex * 100 + i;
+
     products.push({
-
-      id: `S-${categoryIndex}-${i}`,
-
-      cat: category.name,
-
-      catIndex: categoryIndex,
-
-      material: "Silver",
-
-      name:
-        `${category.name} Silver Design ${String(i).padStart(2,"0")}`,
-
-      desc:
-        `Premium Silver ${category.name} — elegant design for शादी, पार्टी और special occasions.`,
-
-      price:
-        silverPrices[
-          (i - 1 + categoryIndex) %
-          silverPrices.length
-        ],
-
-      img:
-        jewelleryImage(
-          category.type,
-          "Silver",
-          i
-        )
-
+      id: id,
+      cat: category[0],
+      catIndex: catIndex,
+      metal: "Silver",
+      number: i,
+      name: `${category[0]} Silver Design ${String(i).padStart(2,"0")}`,
+      desc: `Beautiful ${category[0]} Silver jewellery design — शादी, पार्टी और daily wear के लिए.`,
+      price: silverPrices[(i - 1) % silverPrices.length],
+      img: makeJewelleryImage(category[0], "Silver", i)
     });
-
   }
 
-
-  /* -------------------------------------------------------
-     GOLD — 50 DESIGNS
-     ------------------------------------------------------- */
+  /* ---------- 50 GOLD ---------- */
 
   for (let i = 1; i <= 50; i++) {
 
+    const id = catIndex * 100 + 50 + i;
+
     products.push({
-
-      id: `G-${categoryIndex}-${i}`,
-
-      cat: category.name,
-
-      catIndex: categoryIndex,
-
-      material: "Gold",
-
-      name:
-        `${category.name} Gold Design ${String(i).padStart(2,"0")}`,
-
-      desc:
-        `Premium Gold ${category.name} — royal design for शादी, पार्टी और special occasions.`,
-
-      price:
-        goldPrices[
-          (i - 1 + categoryIndex) %
-          goldPrices.length
-        ],
-
-      img:
-        jewelleryImage(
-          category.type,
-          "Gold",
-          i
-        )
-
+      id: id,
+      cat: category[0],
+      catIndex: catIndex,
+      metal: "Gold",
+      number: i,
+      name: `${category[0]} Gold Design ${String(i).padStart(2,"0")}`,
+      desc: `Beautiful ${category[0]} Gold jewellery design — शादी, पार्टी और bridal look के लिए.`,
+      price: goldPrices[(i - 1) % goldPrices.length],
+      img: makeJewelleryImage(category[0], "Gold", i)
     });
-
   }
 
 });
@@ -935,62 +463,36 @@ categories.forEach((category, categoryIndex) => {
 
 let activeCategory = null;
 
-let cart =
-  JSON.parse(
-    localStorage.getItem("baisaCart") || "[]"
-  );
+let cart = JSON.parse(
+  localStorage.getItem("baisaCart") || "[]"
+);
 
-
-const categoryGrid =
-  document.getElementById("categoryGrid");
-
-const productGrid =
-  document.getElementById("productGrid");
-
-const search =
-  document.getElementById("search");
+const categoryGrid = document.getElementById("categoryGrid");
+const productGrid = document.getElementById("productGrid");
+const search = document.getElementById("search");
 
 
 /* =========================================================
    CATEGORY CARDS
    ========================================================= */
 
-categoryGrid.innerHTML = categories
-  .map((category, index) => {
+categoryGrid.innerHTML = categories.map((c, i) => `
+  <div class="category" onclick="showCategory(${i})">
 
-    return `
+    <div class="emoji">${c[2]}</div>
 
-      <div
-        class="category"
-        onclick="showCategory(${index})"
-      >
+    <h3>${c[0]}</h3>
 
-        <div class="emoji">
-          ${category.icon}
-        </div>
+    <p>${c[1]}</p>
 
-        <h3>
-          ${category.name}
-        </h3>
+    <p><b>100 Designs</b></p>
 
-        <p>
-          ${category.desc}
-        </p>
+    <small>
+      50 Silver + 50 Gold
+    </small>
 
-        <p>
-          <b>100 Designs</b>
-        </p>
-
-        <small>
-          50 Silver + 50 Gold
-        </small>
-
-      </div>
-
-    `;
-
-  })
-  .join("");
+  </div>
+`).join("");
 
 
 /* =========================================================
@@ -999,93 +501,48 @@ categoryGrid.innerHTML = categories
 
 function renderProducts(list = products) {
 
+  document.getElementById("productInfo").textContent =
+    `${list.length} Designs`;
 
-  document.getElementById("productInfo")
-    .textContent =
-      `${list.length} Designs`;
+  productGrid.innerHTML = list.map(p => `
 
+    <article class="product"
+      onclick="openProduct(${p.id})">
 
-  if (!list.length) {
+      <img
+        src="${p.img}"
+        alt="${p.name}"
+        loading="lazy"
+      >
 
-    productGrid.innerHTML = `
+      <div class="product-body">
 
-      <div class="no-products">
+        <div class="product-cat">
+          ${p.cat} • ${p.metal}
+        </div>
 
-        <h3>
-          कोई Design नहीं मिला 😔
-        </h3>
+        <h3>${p.name}</h3>
 
-        <p>
-          कृपया दूसरा नाम search करें।
-        </p>
+        <div class="product-bottom">
+
+          <span class="price">
+            ₹${p.price.toLocaleString("en-IN")}
+          </span>
+
+          <button
+            class="add"
+            onclick="event.stopPropagation();
+            addToCart(${p.id})">
+            Add
+          </button>
+
+        </div>
 
       </div>
 
-    `;
+    </article>
 
-    return;
-  }
-
-
-  productGrid.innerHTML = list
-    .map(product => {
-
-      return `
-
-        <article
-          class="product"
-          onclick="openProduct('${product.id}')"
-        >
-
-          <img
-            src="${product.img}"
-            alt="${product.name}"
-            loading="lazy"
-          >
-
-
-          <div class="product-body">
-
-            <div class="product-cat">
-              ${product.cat}
-              •
-              ${product.material}
-            </div>
-
-
-            <h3>
-              ${product.name}
-            </h3>
-
-
-            <div class="product-bottom">
-
-              <span class="price">
-                ₹${product.price.toLocaleString("en-IN")}
-              </span>
-
-
-              <button
-                class="add"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('${product.id}')
-                "
-              >
-                Add
-              </button>
-
-            </div>
-
-          </div>
-
-        </article>
-
-      `;
-
-    })
-    .join("");
-
+  `).join("");
 }
 
 
@@ -1095,36 +552,23 @@ function renderProducts(list = products) {
 
 function showCategory(index) {
 
-
   activeCategory = index;
 
+  const category = categories[index];
 
-  const category =
-    categories[index];
+  document.getElementById("collectionTitle").textContent =
+    `${category[0]} — ${category[1]}`;
 
-
-  document.getElementById(
-    "collectionTitle"
-  ).textContent =
-    `${category.name} — ${category.desc}`;
-
-
-  const list =
-    products.filter(
-      product =>
-        product.catIndex === index
-    );
-
+  const list = products.filter(
+    p => p.catIndex === index
+  );
 
   renderProducts(list);
 
-
-  document
-    .getElementById("collection")
+  document.getElementById("collection")
     .scrollIntoView({
       behavior: "smooth"
     });
-
 }
 
 
@@ -1134,18 +578,12 @@ function showCategory(index) {
 
 function showAll() {
 
-
   activeCategory = null;
 
-
-  document.getElementById(
-    "collectionTitle"
-  ).textContent =
+  document.getElementById("collectionTitle").textContent =
     "खास Jewellery Collection";
 
-
   renderProducts(products);
-
 }
 
 
@@ -1153,87 +591,45 @@ function showAll() {
    SEARCH
    ========================================================= */
 
-search.addEventListener(
-  "input",
-  function() {
+search.addEventListener("input", () => {
 
+  const q = search.value
+    .trim()
+    .toLowerCase();
 
-    const q =
-      search.value
-        .trim()
-        .toLowerCase();
+  if (!q) {
 
-
-    if (!q) {
-
-      if (activeCategory === null) {
-
-        showAll();
-
-      } else {
-
-        showCategory(activeCategory);
-
-      }
-
-      return;
+    if (activeCategory === null) {
+      showAll();
+    } else {
+      showCategory(activeCategory);
     }
 
-
-    let list =
-      products.filter(product => {
-
-        return (
-
-          product.name
-            .toLowerCase()
-            .includes(q)
-
-          ||
-
-          product.cat
-            .toLowerCase()
-            .includes(q)
-
-          ||
-
-          product.material
-            .toLowerCase()
-            .includes(q)
-
-          ||
-
-          product.desc
-            .toLowerCase()
-            .includes(q)
-
-        );
-
-      });
-
-
-    if (activeCategory !== null) {
-
-      list =
-        list.filter(
-          product =>
-            product.catIndex ===
-            activeCategory
-        );
-
-    }
-
-
-    document.getElementById(
-      "collectionTitle"
-    ).textContent =
-      "Search Results";
-
-
-    renderProducts(list);
-
+    return;
   }
-);
+
+  const list = products.filter(p => {
+
+    return (
+      p.name +
+      " " +
+      p.cat +
+      " " +
+      p.metal +
+      " " +
+      p.desc
+    )
+    .toLowerCase()
+    .includes(q);
+
+  });
+
+  document.getElementById("collectionTitle")
+    .textContent = "Search Results";
+
+  renderProducts(list);
+
+});
 
 
 /* =========================================================
@@ -1242,71 +638,41 @@ search.addEventListener(
 
 function openProduct(id) {
 
+  const p = products.find(
+    x => x.id === id
+  );
 
-  const product =
-    products.find(
-      item => item.id === id
-    );
+  if (!p) return;
 
+  document.getElementById("modalImg").src =
+    p.img;
 
-  if (!product) return;
+  document.getElementById("modalImg").alt =
+    p.name;
 
+  document.getElementById("modalCat").textContent =
+    `${p.cat} • ${p.metal}`;
 
-  document.getElementById(
-    "modalImg"
-  ).src =
-    product.img;
+  document.getElementById("modalName").textContent =
+    p.name;
 
+  document.getElementById("modalDesc").textContent =
+    p.desc;
 
-  document.getElementById(
-    "modalImg"
-  ).alt =
-    product.name;
+  document.getElementById("modalPrice").textContent =
+    "₹" + p.price.toLocaleString("en-IN");
 
+  document.getElementById("modalAdd").onclick =
+    () => {
 
-  document.getElementById(
-    "modalCat"
-  ).textContent =
-    `${product.cat} • ${product.material}`;
+      addToCart(p.id);
 
-
-  document.getElementById(
-    "modalName"
-  ).textContent =
-    product.name;
-
-
-  document.getElementById(
-    "modalDesc"
-  ).textContent =
-    product.desc;
-
-
-  document.getElementById(
-    "modalPrice"
-  ).textContent =
-    "₹" +
-    product.price.toLocaleString("en-IN");
-
-
-  document.getElementById(
-    "modalAdd"
-  ).onclick =
-    function() {
-
-      addToCart(product.id);
-
-      closeModal(
-        "productModal"
-      );
+      closeModal("productModal");
 
     };
 
-
-  document
-    .getElementById("productModal")
+  document.getElementById("productModal")
     .classList.remove("hidden");
-
 }
 
 
@@ -1316,21 +682,15 @@ function openProduct(id) {
 
 function addToCart(id) {
 
+  const p = products.find(
+    x => x.id === id
+  );
 
-  const product =
-    products.find(
-      item => item.id === id
-    );
+  if (!p) return;
 
-
-  if (!product) return;
-
-
-  const found =
-    cart.find(
-      item => item.id === id
-    );
-
+  const found = cart.find(
+    x => x.id === id
+  );
 
   if (found) {
 
@@ -1339,23 +699,15 @@ function addToCart(id) {
   } else {
 
     cart.push({
-
-      id: product.id,
-
+      id: p.id,
       qty: 1
-
     });
 
   }
 
-
   saveCart();
 
-
-  alert(
-    `${product.name} Cart में Add हो गया 🛒`
-  );
-
+  alert(`${p.name} Cart में Add हो गया ❤️`);
 }
 
 
@@ -1365,26 +717,18 @@ function addToCart(id) {
 
 function saveCart() {
 
-
   localStorage.setItem(
     "baisaCart",
     JSON.stringify(cart)
   );
 
+  const count = cart.reduce(
+    (total, item) => total + item.qty,
+    0
+  );
 
-  const count =
-    cart.reduce(
-      (total, item) =>
-        total + item.qty,
-      0
-    );
-
-
-  document.getElementById(
-    "cartCount"
-  ).textContent =
-    count;
-
+  document.getElementById("cartCount")
+    .textContent = count;
 }
 
 
@@ -1394,118 +738,85 @@ function saveCart() {
 
 function openCart() {
 
-
   const box =
-    document.getElementById(
-      "cartItems"
-    );
-
+    document.getElementById("cartItems");
 
   if (!cart.length) {
 
     box.innerHTML = `
-
       <p>
         Cart अभी खाली है।
         Jewellery select करके Add करें 💎
       </p>
-
     `;
 
   } else {
 
+    box.innerHTML = cart.map(item => {
 
-    box.innerHTML =
-      cart.map(item => {
+      const p = products.find(
+        x => x.id === item.id
+      );
 
+      if (!p) return "";
 
-        const product =
-          products.find(
-            p => p.id === item.id
-          );
+      return `
 
+        <div class="cart-row">
 
-        if (!product) return "";
+          <img
+            src="${p.img}"
+            alt="${p.name}"
+          >
 
+          <div>
 
-        return `
+            <h4>${p.name}</h4>
 
-          <div class="cart-row">
-
-            <img
-              src="${product.img}"
-              alt="${product.name}"
-            >
-
-
-            <div>
-
-              <h4>
-                ${product.name}
-              </h4>
-
-              <p>
-                ${product.material}
-                •
-                ₹${product.price.toLocaleString("en-IN")}
-                × ${item.qty}
-              </p>
-
-            </div>
-
-
-            <button
-              class="remove"
-              onclick="
-                removeCart('${product.id}')
-              "
-            >
-              Remove
-            </button>
+            <p>
+              ₹${p.price.toLocaleString("en-IN")}
+              × ${item.qty}
+            </p>
 
           </div>
 
-        `;
+          <button
+            class="remove"
+            onclick="removeCart(${p.id})">
+            Remove
+          </button>
 
-      }).join("");
+        </div>
+
+      `;
+
+    }).join("");
 
   }
 
 
-  const total =
-    cart.reduce(
-      (sum, item) => {
+  const total = cart.reduce(
+    (sum, item) => {
+
+      const p = products.find(
+        x => x.id === item.id
+      );
+
+      return sum +
+        (p ? p.price * item.qty : 0);
+
+    },
+    0
+  );
 
 
-        const product =
-          products.find(
-            p => p.id === item.id
-          );
+  document.getElementById("cartTotal")
+    .textContent =
+    "₹" + total.toLocaleString("en-IN");
 
 
-        return sum +
-          (
-            product
-              ? product.price * item.qty
-              : 0
-          );
-
-      },
-      0
-    );
-
-
-  document.getElementById(
-    "cartTotal"
-  ).textContent =
-    "₹" +
-    total.toLocaleString("en-IN");
-
-
-  document
-    .getElementById("cartModal")
+  document.getElementById("cartModal")
     .classList.remove("hidden");
-
 }
 
 
@@ -1515,18 +826,13 @@ function openCart() {
 
 function removeCart(id) {
 
-
-  cart =
-    cart.filter(
-      item =>
-        item.id !== id
-    );
-
+  cart = cart.filter(
+    x => x.id !== id
+  );
 
   saveCart();
 
   openCart();
-
 }
 
 
@@ -1536,9 +842,7 @@ function removeCart(id) {
 
 function closeModal(id) {
 
-
-  document
-    .getElementById(id)
+  document.getElementById(id)
     .classList.add("hidden");
 
 }
@@ -1550,23 +854,36 @@ function closeModal(id) {
 
 function checkout() {
 
-
   if (!cart.length) {
 
-    alert(
-      "Cart खाली है।"
-    );
+    alert("Cart खाली है।");
 
     return;
   }
 
+  const total = cart.reduce(
+    (sum, item) => {
 
-  alert(
-    "Order / Payment system तैयार है। " +
-    "UPI ID या Payment Gateway जोड़कर " +
-    "real payment चालू किया जा सकता है।"
+      const p = products.find(
+        x => x.id === item.id
+      );
+
+      return sum +
+        (p ? p.price * item.qty : 0);
+
+    },
+    0
   );
 
+
+  alert(
+    "Order तैयार है ❤️\n\n" +
+    "Total: ₹" +
+    total.toLocaleString("en-IN") +
+    "\n\n" +
+    "COD Available.\n" +
+    "Payment Gateway / WhatsApp Order बाद में जोड़ सकते हैं।"
+  );
 }
 
 
@@ -1580,30 +897,24 @@ renderProducts(products);
 
 
 /* =========================================================
-   CLOSE MODAL OUTSIDE
+   ESC KEY - MODAL CLOSE
    ========================================================= */
 
-document
-  .querySelectorAll(".modal")
-  .forEach(modal => {
+document.addEventListener(
+  "keydown",
+  function(event) {
 
+    if (event.key === "Escape") {
 
-    modal.addEventListener(
-      "click",
-      function(event) {
+      document
+        .querySelectorAll(".modal")
+        .forEach(modal => {
 
+          modal.classList.add("hidden");
 
-        if (
-          event.target === modal
-        ) {
+        });
 
-          modal.classList.add(
-            "hidden"
-          );
+    }
 
-        }
-
-      }
-    );
-
-  });
+  }
+);
